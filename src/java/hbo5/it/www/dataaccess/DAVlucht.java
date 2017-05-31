@@ -5,6 +5,7 @@
  */
 package hbo5.it.www.dataaccess;
 
+import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Vlucht;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +16,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.apache.jasper.tagplugins.jstl.ForEach;
 
 
@@ -55,6 +55,14 @@ public DAVlucht (String url, String login, String password, String driver)   thr
                 V.setVliegtuig_id(set.getInt("vliegtuig_id"));
                 V.setVertrekluchthaven_id(set.getInt("vertrekLuchthaven_id"));
                 V.setAankomstluchthaven_id(set.getInt("aankomstluchthaven_id"));
+                Luchthaven lh = new Luchthaven();
+                lh.setId(set.getInt("aankomstluchthaven_id"));
+                lh.setNaam(set.getString("naam"));
+                V.setLuchthaven(lh);
+                Luchthaven lh2 = new Luchthaven();
+                lh.setId(set.getInt("vertrekluchthaven_id"));
+                lh.setNaam(set.getString("naam"));
+                V.setLuchthaven(lh);
                 Lijst.add(V);
             }
         } 

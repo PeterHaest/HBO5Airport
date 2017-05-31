@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class Vlucht {
     private int id;
+    private Luchthaven luchthaven;
     private String code;
     private Timestamp vertrektijd;
     private Timestamp aankomsttijd;
@@ -21,6 +22,16 @@ public class Vlucht {
     private int vertrekluchthaven_id;
     private int aankomstluchthaven_id;
 
+    public Luchthaven getLuchthaven() {
+        return luchthaven;
+    }
+
+    public void setLuchthaven(Luchthaven luchthaven) {
+        this.luchthaven = luchthaven;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

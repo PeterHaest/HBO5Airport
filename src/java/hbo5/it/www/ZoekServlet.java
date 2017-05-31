@@ -126,23 +126,23 @@ public class ZoekServlet extends HttpServlet {
                 String input = request.getParameter("input");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpCode(input);
                 request.setAttribute("vluchten", vluchten);
-                request.getRequestDispatcher("zoektest.jsp").forward(request, response);
+                request.getRequestDispatcher("Zoekresult.jsp").forward(request, response);
             }
             else if ("datum".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
-                request.getRequestDispatcher("zoektest.jsp").forward(request, response);
+                request.getRequestDispatcher("Zoekresult.jsp").forward(request, response);
             }
             else if ("bestemming".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpBestemming(Integer.parseInt(input));
                 request.setAttribute("vluchten", vluchten);
-                request.getRequestDispatcher("zoektest.jsp").forward(request, response);
+                request.getRequestDispatcher("Zoekresult.jsp").forward(request, response);
             }
             else if ("luchtvaartmaatschappij".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpLuchtvaartmaatschappij(Integer.parseInt(input));
                 request.setAttribute("vluchten", vluchten);
-                request.getRequestDispatcher("zoektest.jsp").forward(request, response);
+                request.getRequestDispatcher("Zoekresult.jsp").forward(request, response);
             }
         }
     }

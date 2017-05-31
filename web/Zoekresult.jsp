@@ -60,21 +60,7 @@
         </div>
         <section class="tour section-wrapper tablecontainer">
             <!--for demo wrap-->
-            <h1 class="tour section-wrapper container">Inkomende vluchten</h1>
-            <form action="ZoekServlet">
-                <select name="Luchthaven" class="col-md-offset-1">             
-                    <option value="1">Brussels Airport</option>
-                    <option value="2">Schiphol</option>
-                    <option value="3">Charles de Gaulle</option>
-                    <option value="4">Heathrow</option>
-                    <option value="5">Tegel</option>
-                    <option value="6">Goteborg City Airport</option>
-                    <option value="7">Venice VCE</option>
-                    <option value="8">Abu Dhabi</option>
-                    <option value="9">Sri Guru Ram DassJee</option>
-                </select>
-            <input type="submit" name="Zoeken" value="inkomend" class="btn btn-default">
-            </form>
+            <h1 class="tour section-wrapper container">Gevonden vluchten</h1>
             <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
                     <thead>              
                         <tr>
@@ -95,7 +81,7 @@
                     <td><%=vlucht.getCode()%></td>
                     <td><%=vlucht.getVliegtuig_id()%></td>
                     <td><%=vlucht.getVertrekluchthaven_id()%></td>
-                    <td><%=vlucht.getLuchthaven().getNaam() %></td>
+                    <td><%=vlucht.getAankomstluchthaven_id() %></td>
                     <td><%=vlucht.getAankomsttijd() %></td>
                 </tr>
                 
