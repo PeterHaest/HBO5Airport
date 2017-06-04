@@ -71,12 +71,11 @@
                                             <option value="<%=teller%>" ><%=item%></option>
                                            <%teller++;}%>
                                     </select>
-        
+            </form>
             <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
                     <thead>              
                         <tr>
                             <th>Vluchtnummer</th>
-                            <th>Vliegtuig</th>
                             <th>Vertrek</th>
                             <th>Aankomst</th>
                             <th>Aankomsttijd</th>
@@ -88,13 +87,15 @@
                 (ArrayList<Vlucht>) request.getAttribute("vluchten");
 
 		for (Vlucht vlucht: resultaat){%>
+                <form action="">
                 <tr>
-                    <td><%=vlucht.getCode()%></td>
-                    <td><%=vlucht.getVliegtype().getNaam()%></td>
+                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
                     <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomstluchthaven().getNaam() %></td>
+                    <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
                     <td><%=vlucht.getAankomsttijd() %></td>
+                    <td><button name="Boeken" value="<%=vlucht.getId()%>" type="submit">Boeken</button></td>
                 </tr>
+                </form>
                 
 		<%}%>
             </tbody>

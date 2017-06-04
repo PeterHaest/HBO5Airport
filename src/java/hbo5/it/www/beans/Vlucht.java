@@ -15,6 +15,7 @@ import java.util.Date;
 public class Vlucht {
     private int id;
     private String code;
+    private Luchtvaartmaatschappij luchtvaarmaatschappij;
     private Luchthaven aankomstluchthaven;
     private Luchthaven vertrekluchthaven;
     private Vliegtuig vliegtuig;
@@ -24,6 +25,14 @@ public class Vlucht {
     private int vliegtuig_id;
     private int vertrekluchthaven_id;
     private int aankomstluchthaven_id;
+
+    public Luchtvaartmaatschappij getLuchtvaarmaatschappij() {
+        return luchtvaarmaatschappij;
+    }
+
+    public void setLuchtvaarmaatschappij(Luchtvaartmaatschappij luchtvaarmaatschappij) {
+        this.luchtvaarmaatschappij = luchtvaarmaatschappij;
+    }
 
     public Luchthaven getAankomstluchthaven() {
         return aankomstluchthaven;

@@ -32,7 +32,7 @@
 					<div class="form-group">
 						<label for="sel1">Select list (select one):</label>
 						<select name="optie" class="form-control border-radius" id="sel1">
-							<option value="vluchtnr">Vluchtnummer</option>
+							<option value="vluchtnummer">Vluchtnummer</option>
 							<option value="datum">Datum</option>
 							<option value="bestemming">Bestemming</option>
 							<option value="luchtvaartmaatschappij">Luchtvaartmaatschappij</option>

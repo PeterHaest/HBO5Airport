@@ -60,7 +60,8 @@
         </div>
         <section class="tour section-wrapper tablecontainer">
             <!--for demo wrap-->
-            <h1 class="tour section-wrapper container">Gevonden vluchten</h1>
+            <h1 class="tour section-wrapper container">Gevonden vluchten voor vluchten met ${optie} ${input}</h1>
+            <a class="btn btn-default col-md-offset-1" href="zoektest.jsp">Return</a>
             <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
                     <thead>              
                         <tr>
@@ -77,14 +78,16 @@
                 (ArrayList<Vlucht>) request.getAttribute("vluchten");
 
 		for (Vlucht vlucht: resultaat){%>
-                <tr>
-                    <td><%=vlucht.getCode()%></td>
-                    <td><%=vlucht.getVliegtuig_id()%></td>
-                    <td><%=vlucht.getVertrekluchthaven_id()%></td>
-                    <td><%=vlucht.getAankomstluchthaven_id() %></td>
-                    <td><%=vlucht.getAankomsttijd() %></td>
-                </tr>
-                
+                <form action="">
+                    <tr>
+                        <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
+                        <td><%=vlucht.getVliegtype().getNaam()%></td>
+                        <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
+                        <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
+                        <td><%=vlucht.getAankomsttijd() %></td>
+                        <td><button name="Boeken" value="<%=vlucht.getId()%>" type="Boeken">Details</button></td>
+                    </tr>
+                </form>
 		<%}%>
             </tbody>
             </table>

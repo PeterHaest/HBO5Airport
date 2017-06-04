@@ -58,49 +58,19 @@
 	  	</div><!-- /.container -->
 	</nav>
         </div>
-        <section class="tour section-wrapper tablecontainer">
+        <section class="tour section-wrapper col-md-offset-2">
             <!--for demo wrap-->
-            <h1 class="tour section-wrapper container">Uitgaande vluchten</h1>
-            <form action="ZoekServlet">
-                <%int teller = 1;%>
-                <label for="Luchthaven">kies een luchthaven</label>
-                                    <select onchange="this.form.submit()" class="form-control" name="Luchthaven" style="width: 50%; margin: 15px">
-                                        <option selected="true" value ="0"></option>
-                                         <%ArrayList<String> lijst =(ArrayList<String>) session.getAttribute("lijsthavens");%>
-                                            <%for (String item : lijst) {%>
-                                            <option value="<%=teller%>" ><%=item%></option>
-                                           <%teller++;}%>
-                                    </select>
-            </form>
-            <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
-                    <thead>              
-                        <tr>
-                            <th>Vluchtnummer</th>
-                            <th>Vertrek</th>
-                            <th>Vertrektijd</th>
-                            <th>Aankomst</th>
-                            <th>Aankomsttijd</th>
-                        </tr>
-                    </thead>
-                <tbody>
-            </section>
-                <%ArrayList<Vlucht> resultaat = 
-                (ArrayList<Vlucht>) request.getAttribute("vluchten");
-
-		for (Vlucht vlucht: resultaat){%>
-                <form action="">
-                    <tr>
-                        <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
-                        <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
-                        <td><%=vlucht.getVertrektijd() %></td>
-                        <td><%=vlucht.getAankomstluchthaven().getNaam() %></td>
-                        <td><%=vlucht.getAankomsttijd() %></td>
-                        <td><button name="Boeken" value="<%=vlucht.getId()%>" type="submit">Boeken</button></td>
-                    </tr>
-                </form>
-		<%}%>
-            </tbody>
-            </table>
+            <h1 class="tour section-wrapper container">Details voor vlucht met vluchtnummer ${vlucht.code}:</h1>
+            <p>Vluchtnummer: ${vlucht.code}</p>
+            <p>Aankomstluchthaven: ${vlucht.aankomstluchthaven.naam}</p>
+            <p>Vertrekluchthaven: ${vlucht.vertrekluchthaven.naam}</p>
+            <p>Luchtvaartmaatschappij: ${vlucht.luchtvaarmaatschappij.naam}</p>
+            <p>Vliegtuigtype: ${vlucht.vliegtype.naam}</p>
+            <p></p>
+            <p></p>
+        </section>
+            
+            
 
 
 
