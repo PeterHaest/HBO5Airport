@@ -5,6 +5,7 @@
  */
 package hbo5.it.www;
 
+import hbo5.it.www.beans.Passagier;
 import hbo5.it.www.beans.Vlucht;
 import hbo5.it.www.dataaccess.DALuchthaven;
 import hbo5.it.www.dataaccess.DAPersoon;
@@ -181,7 +182,7 @@ public class ZoekServlet extends HttpServlet {
             else if ("bestemming".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 String optie = request.getParameter("optie");
-                ArrayList<Vlucht> vluchten = davlucht.VluchtOpBestemming(Integer.parseInt(input));
+                ArrayList<Vlucht> vluchten = davlucht.VluchtOpBestemming(input);
                 request.setAttribute("vluchten", vluchten);
                 request.setAttribute("input", input);
                 request.setAttribute("optie", optie);
@@ -190,7 +191,7 @@ public class ZoekServlet extends HttpServlet {
             else if ("luchtvaartmaatschappij".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 String optie = request.getParameter("optie");
-                ArrayList<Vlucht> vluchten = davlucht.VluchtOpLuchtvaartmaatschappij(Integer.parseInt(input));
+                ArrayList<Vlucht> vluchten = davlucht.VluchtOpLuchtvaartmaatschappij(input);
                 request.setAttribute("vluchten", vluchten);
                 request.setAttribute("input", input);
                 request.setAttribute("optie", optie);
@@ -199,7 +200,9 @@ public class ZoekServlet extends HttpServlet {
         }
         else if ((Integer)session.getAttribute("Search") == 3){
             Vlucht v = davlucht.ZoekDetails(Integer.parseInt(request.getParameter("id")));
+            ArrayList<Passagier> passagiers = davlucht.DetailsPassagiers(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("vlucht", v);
+            request.setAttribute("passagiers", passagiers);
             request.getRequestDispatcher("details.jsp").forward(request, response);
         }
     }

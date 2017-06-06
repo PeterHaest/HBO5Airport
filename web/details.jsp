@@ -5,6 +5,7 @@
     Author     : steve
 --%>
 
+<%@page import="hbo5.it.www.beans.Passagier"%>
 <%@page import="hbo5.it.www.beans.Vlucht"%>
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,16 +62,30 @@
         <section class="tour section-wrapper col-md-offset-2">
             <!--for demo wrap-->
             <h1 class="tour section-wrapper container">Details voor vlucht met vluchtnummer ${vlucht.code}:</h1>
-            <p>Vluchtnummer: ${vlucht.code}</p>
-            <p>Aankomstluchthaven: ${vlucht.aankomstluchthaven.naam}</p>
-            <p>Vertrekluchthaven: ${vlucht.vertrekluchthaven.naam}</p>
-            <p>Luchtvaartmaatschappij: ${vlucht.luchtvaarmaatschappij.naam}</p>
-            <p>Vliegtuigtype: ${vlucht.vliegtype.naam}</p>
-            <p></p>
-            <p></p>
-        </section>
+            <h2>Vlucht</h2>
+            <p><b>Vluchtnummer:</b> ${vlucht.code}</p>
+            <p><b>Aankomstluchthaven:</b> ${vlucht.aankomstluchthaven.naam}</p>
+            <p><b>Vertrekluchthaven:</b> ${vlucht.vertrekluchthaven.naam}</p>
+            <p><b>Luchtvaartmaatschappij:</b> ${vlucht.luchtvaarmaatschappij.naam}</p>
+            <p><b>Vliegtuigtype:</b> ${vlucht.vliegtype.naam}</p>
+            <h2>Passagiers</h2>
+            <ol>
             
-            
+            <%ArrayList<Passagier> resultaat = 
+                (ArrayList<Passagier>) request.getAttribute("passagiers");
+                if (resultaat.isEmpty()) {%>
+                <p><b>! Er zijn nog geen passagiers voor deze vlucht !</b></p>
+                <%}%>
+		<%for (Passagier passagier : resultaat){%>
+                
+                <li><b>Naam:</b> <%=passagier.getPersoon().getVoornaam()%> <%=passagier.getPersoon().getFamilienaam()%> 
+                    </br> <b>Straat:</b> <%=passagier.getPersoon().getStraat()%> <%=passagier.getPersoon().getHuisnr()%> 
+                    </br> <b>Woonplaats:</b> <%=passagier.getPersoon().getPostcode()%> <%=passagier.getPersoon().getWoonplaats()%> 
+                    </br> <b>Geboortedatum:</b> <%=passagier.getPersoon().getGeboortedatum()%></li>
+                </br>
+            <%}%>
+            </ol>
+            </section>
 
 
 

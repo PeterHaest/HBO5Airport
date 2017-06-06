@@ -64,7 +64,7 @@
             <form action="ZoekServlet">
                 <%int teller = 1;%>
                 <label for="Luchthaven">kies een luchthaven</label>
-                                    <select onchange="this.form.submit()" class="form-control" name="Luchthaven" style="width: 50%; margin: 15px">
+                                    <select onchange="this.form.submit()" class="form-control" name="Luchthaven" style="width: 20%; margin: 15px">
                                         <option selected="true" value ="0"></option>
                                          <%ArrayList<String> lijst =(ArrayList<String>) session.getAttribute("lijsthavens");%>
                                             <%for (String item : lijst) {%>

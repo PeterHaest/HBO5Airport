@@ -7,6 +7,8 @@ package hbo5.it.www.dataaccess;
 
 import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Luchtvaartmaatschappij;
+import hbo5.it.www.beans.Passagier;
+import hbo5.it.www.beans.Persoon;
 import hbo5.it.www.beans.Vliegtuig;
 import hbo5.it.www.beans.Vliegtuigtype;
 import hbo5.it.www.beans.Vlucht;
@@ -138,8 +140,8 @@ public DAVlucht (String url, String login, String password, String driver)   thr
         ResultSet set = null;
         
          try {
-                statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID where code = ?");
-               statement.setString(1,code);
+                statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID where lower(code) like ?");
+               statement.setString(1, "%"+ code.toLowerCase() +"%");
                set = statement.executeQuery();
                
                while(set.next()) {
@@ -220,7 +222,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          
      }
      
-     public ArrayList<Vlucht> VluchtOpBestemming(int aankomstluchthaven_id){
+     public ArrayList<Vlucht> VluchtOpBestemming(String aankomstluchthaven){
          
         ArrayList<Vlucht> Lijst = new ArrayList<>();
         Vlucht V = null;
@@ -228,8 +230,8 @@ public DAVlucht (String url, String login, String password, String driver)   thr
         ResultSet set = null;
          
          try {
-             statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID where aankomstLuchthaven_id = ?");
-             statement.setInt(1, aankomstluchthaven_id);
+             statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID where lower(lh2.naam) like ?");
+             statement.setString(1, "%"+aankomstluchthaven.toLowerCase()+"%");
              set = statement.executeQuery();
              while(set.next()) {
                 V = new Vlucht();
@@ -269,16 +271,16 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          
      }
      
-     public ArrayList<Vlucht> VluchtOpLuchtvaartmaatschappij(int maatschappij_id){
+     public ArrayList<Vlucht> VluchtOpLuchtvaartmaatschappij(String maatschappij){
          
         ArrayList<Vlucht> Lijst = new ArrayList<>();
         Vlucht V = null;
         PreparedStatement statement = null;
         ResultSet set = null;
             try {
-                statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID where VLIEGTUIG.LUCHTVAARTMAATSCHAPPIJ_ID = ?");
+                statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID inner join luchtvaartmaatschappij on VLIEGTUIG.LUCHTVAARTMAATSCHAPPIJ_ID = luchtvaartmaatschappij.id where lower(luchtvaartmaatschappij.naam) like ?");
                 
-               statement.setInt(1, maatschappij_id);
+               statement.setString(1, "%" + maatschappij.toLowerCase() + "%");
                set = statement.executeQuery();
                 while(set.next()) {
                 V = new Vlucht();
@@ -357,6 +359,52 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          } catch (Exception e) {
          }
          return V;
+     }
+        
+    public ArrayList<Passagier> DetailsPassagiers(int vlucht_id){
+         
+        ArrayList<Passagier> Lijst = new ArrayList<>();
+        Passagier P = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+         
+         try {
+             statement = connection.prepareStatement("SELECT * FROM PASSAGIER inner join persoon on persoon_id = persoon.id WHERE vlucht_id = ?");
+             statement.setInt(1, vlucht_id);
+             set = statement.executeQuery();
+             while(set.next()) {
+                P = new Passagier();
+                P.setId(set.getInt("id"));
+                P.setIngeschreven(set.getInt("ingeschreven"));
+                P.setIngecheckt(set.getInt("ingecheckt"));
+                P.setKlasse_id(set.getInt("klasse_id"));
+                P.setPlaats(set.getString("plaats"));
+                P.setVlucht_id(set.getInt("vlucht_id"));
+                P.setPersoon_id(set.getInt("persoon_id"));
+                Persoon pers = new Persoon();
+                pers.setId(set.getInt("persoon_id"));
+                pers.setVoornaam(set.getString("voornaam"));
+                pers.setFamilienaam(set.getString("familienaam"));
+                pers.setStraat(set.getString("straat"));
+                pers.setHuisnr(set.getString("huisnr"));
+                pers.setPostcode(set.getString("postcode"));
+                pers.setWoonplaats(set.getString("woonplaats"));
+                pers.setLand(set.getString("land"));
+                pers.setGeboortedatum(set.getDate("geboortedatum"));
+                pers.setLogin("");
+                pers.setPaswoord("");
+                P.setPersoon(pers);              
+                Lijst.add(P);
+               }
+             
+             
+             
+         } catch (Exception e) {
+         }
+         
+         
+         return  Lijst;
+         
      }
 
 }
