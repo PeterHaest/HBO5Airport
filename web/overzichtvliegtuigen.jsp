@@ -138,7 +138,7 @@
 
 
 
-
+                                <%session.setAttribute("currentPage", "overzichtvliegtuigen.jsp");%>
 
     </body>
 </html>

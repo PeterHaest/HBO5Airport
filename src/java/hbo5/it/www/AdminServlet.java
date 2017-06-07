@@ -26,6 +26,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -179,6 +180,9 @@ public class AdminServlet extends HttpServlet {
             }
 
             else if (request.getParameter("btnVerwijder") != null) {
+                
+                
+                
                 url="LoginPage.jsp";
             }
             else if("luchthavens".equals( request.getParameter("page"))){
@@ -235,6 +239,9 @@ public class AdminServlet extends HttpServlet {
              url="newitem.jsp";
          }
              else if ("update".equals(request.getParameter("choice"))) {
+                 if (request.getParameter("txtid") != null) {
+                
+            
                  session.setAttribute("maatschappijen", dalease.get_Leasemaatschappij());
                   session.setAttribute("lijstmaatschappijen",damaatschappij.get_luchtvaartmaatschapijen());
                   if ("lease".equals(request.getParameter("kind"))) {
@@ -254,6 +261,10 @@ public class AdminServlet extends HttpServlet {
                        session.setAttribute("L", null);
                   }
                   url="wijzigitem.jsp";
+                 }
+                 else{
+                     url = (String) session.getAttribute("currentPage");
+                 }
         }
               else if ("delete".equals(request.getParameter("choice"))) {
                   if ("lease".equals(request.getParameter("kind"))) {
@@ -294,7 +305,11 @@ public class AdminServlet extends HttpServlet {
         }
              else if (request.getParameter("update") != null) {
                  Map<String,Object> nMap = new HashMap<>();
-                 Integer id = Integer.parseInt(request.getParameter("txtid"));
+                  Integer id = Integer.parseInt(request.getParameter("txtid"));
+                 if (id != null) {
+                
+            
+                
                  String item = "";
                    if ("Lease".equals(session.getAttribute("newItem"))) {
                        nMap.put("naam",request.getParameter("txtnaam") );
@@ -313,9 +328,23 @@ public class AdminServlet extends HttpServlet {
                        nMap.put("luchtvaartmaatschappij_id", Integer.parseInt(request.getParameter("LstMaatschappij")));
                        item = "vliegtuig";
                     }
+                    else if("Persoon".equals(session.getAttribute("newItem"))){
+                        Persoon p = (Persoon) session.getAttribute("ChosenPerson");
+                        
+                        nMap.put("voornaam", p.getVoornaam());
+                        nMap.put("familienaam", p.getFamilienaam());
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        item = "persoon";
+                    }
                    
                     davliegtuig.UpdateVliegtuig( id,item , nMap);
-                   
+                 }
                    
                    
                    
