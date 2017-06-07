@@ -118,7 +118,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtMaatschappijen.jsp");%>
 
     </body>
 </html>

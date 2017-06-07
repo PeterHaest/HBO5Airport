@@ -135,7 +135,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtPassagiers.jsp");%>
 
     </body>
 </html>

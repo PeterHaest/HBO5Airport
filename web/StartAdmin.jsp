@@ -33,6 +33,7 @@
                                             <li class="active"><a href="AdminServlet?page=bemanning">bemanning en vluchtbemanning</a></li>
                                             <li class="active"><a href="AdminServlet?page=passagiers">passagiers</a></li>
                                             <li class="active"><a href="AdminServlet?page=hangars">hangars en vliegtuigen in hangars</a></li>
+                                            <li class="active"><a href="AdminServlet?page=vlucht">nieuwe vlucht opstellen</a></li>
                                         </ul>
                                         
             </nav>

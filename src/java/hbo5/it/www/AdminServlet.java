@@ -5,6 +5,7 @@
  */
 package hbo5.it.www;
 
+
 import hbo5.it.www.beans.Crew;
 import hbo5.it.www.beans.Hangar;
 import hbo5.it.www.beans.Luchthaven;
@@ -22,10 +23,17 @@ import hbo5.it.www.dataaccess.DAVliegtuigtype;
 import hbo5.it.www.dataaccess.DAVlucht;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -214,6 +222,10 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("lijsthangarnamen", dahangar.get_namen((ArrayList<Hangar>)session.getAttribute("lijstHangars")));
                 url = "overzichtHangars.jsp";
             }
+            else if ("vlucht".equals(request.getParameter("page"))){
+                request.setAttribute("topId", dalease.getTopId("vlucht"));   
+                url = "newitem.jsp?kind=vlucht";
+            }
             
              else  if ("add".equals(request.getParameter("choice"))){
              if ("lease".equals(request.getParameter("kind"))) {
@@ -233,6 +245,7 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("topId", dalease.getTopId("vliegtuig"));
                 request.setAttribute("kind", "vliegtuig");
             }
+              
              
              
              
@@ -277,8 +290,10 @@ public class AdminServlet extends HttpServlet {
             } 
         }
              else if (request.getParameter("nieuw") != null) {
+                 Integer id = Integer.parseInt( request.getParameter("txtid"));
+                 Map<String,Object> nMap = new HashMap<>();
                    if ("Lease".equals(session.getAttribute("newItem"))) {
-            dalease.Add_maatschappij(Integer.parseInt( request.getParameter("txtid")), request.getParameter("txtnaam"),"leasemaatschappij");
+            dalease.Add_maatschappij( id, request.getParameter("txtnaam"),"leasemaatschappij");
                    }
                    else   if ("Haven".equals(session.getAttribute("newItem"))) {
                        daLuchthaven.Add_luchthaven(Integer.parseInt(request.getParameter("txtid")), request.getParameter("txtnaam"), request.getParameter("txtstad"));
@@ -297,6 +312,34 @@ public class AdminServlet extends HttpServlet {
            
                 url= "AdminServlet?page=vliegtuig";
             }
+                   else if("vlucht".equals(session.getAttribute("newItem"))){
+                       SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+                       SimpleDateFormat dtc = new SimpleDateFormat("dd/mm/yy");
+                       Date vertrek = null;
+                       Date aankomst = null;
+                     try {
+                         vertrek = dt.parse(request.getParameter("txtVertrek"));
+                         aankomst = dt.parse(request.getParameter("txtAankomst"));
+                         
+                     } catch (ParseException ex) {
+                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                       
+                       
+                       
+                       
+                       nMap.clear();
+                       nMap.put("1", id);
+                       nMap.put("2", request.getParameter("txtCode"));
+                       nMap.put("3", dtc.format(vertrek));
+                       nMap.put("4", dtc.format(aankomst));
+                       nMap.put("5", request.getParameter("LstType"));
+                       nMap.put("6", request.getParameter("LstVertrek"));
+                       nMap.put("7", request.getParameter("LstAankomst"));
+                       
+                       davliegtuig.Add_Row( nMap, (String) session.getAttribute("newItem"));
+                 url="AdminServlet?page=vlucht";
+             }
                    
                    
                    
@@ -307,9 +350,6 @@ public class AdminServlet extends HttpServlet {
                  Map<String,Object> nMap = new HashMap<>();
                   Integer id = Integer.parseInt(request.getParameter("txtid"));
                  if (id != null) {
-                
-            
-                
                  String item = "";
                    if ("Lease".equals(session.getAttribute("newItem"))) {
                        nMap.put("naam",request.getParameter("txtnaam") );

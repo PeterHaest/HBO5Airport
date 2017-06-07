@@ -133,7 +133,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtBemanning.jsp");%>
 
 
     </body>

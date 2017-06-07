@@ -151,6 +151,6 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtHangars.jsp");%>
     </body>
 </html>

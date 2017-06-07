@@ -137,7 +137,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtLuchthavens.jsp");%>
 
     </body>
 </html>

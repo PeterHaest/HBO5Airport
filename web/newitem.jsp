@@ -5,6 +5,11 @@
     Author     : steve
 --%>
 
+<%@page import="java.time.ZonedDateTime"%>
+<%@page import="java.util.Calendar"%>
+
+<%@page import="oracle.sql.Datum"%>
+<%@page import="java.time.Instant"%>
 <%@page import="hbo5.it.www.beans.Luchtvaartmaatschappij"%>
 <%@page import="hbo5.it.www.beans.Vliegtuigtype"%>
 <%@page import="hbo5.it.www.beans.Vliegtuig"%>
@@ -137,7 +142,57 @@
                                             </td>
                                     </tr>
 <%}%>
-
+<%if("vlucht".equals(request.getParameter("kind"))){%>
+     <%session.setAttribute("newItem", "vlucht");%>
+<table>
+    <th>id</th>
+    <th>code</th>
+    <th>vertrekdatum</th>
+    <th>Aankomst</th>
+    <th>Vliegtuigtype</th>
+    <th>vertrekluchthaven</th>
+    <th>aankomstluchthaven</th>
+    
+    <tr>
+        <td><input type="text" readonly="true" name="txtid" value="<%=request.getAttribute("topId")%>"> </td>
+        <td><input type="text" name="txtCode"></td>
+        <td><input type="date" name="txtVertrek"  ></td>
+        <td><input type="date" name="txtAankomst"></td>
+        <td>
+             <select name="LstType">
+                                                    <% ArrayList<Vliegtuigtype> vlieglijst = (ArrayList<Vliegtuigtype>) session.getAttribute("lijstTypes");
+                                                    for (Vliegtuigtype item : vlieglijst) {
+                                                    %>
+                                                    <option value="<%=item.getId()%>"> <%=item.getNaam()%> </option>
+                                                    <%}%>
+ 
+                                                </select>
+        </td>
+           <td>
+                                                <select name="LstVertrek">
+                                        <option ></option>
+                                        <%ArrayList<Luchthaven> luchtlijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
+                                        <%for (Luchthaven item : luchtlijst) {%>
+                                            <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+                                           <%}%>
+                                    </select>
+                                            </td>
+                                               <td>
+                                                <select name="LstAankomst">
+                                        <option></option>
+                                        
+                                        <%for (Luchthaven item : luchtlijst) {%>
+                                            <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+                                           <%}%>
+                                    </select>
+                                            </td>
+    </tr>
+    
+</table>
+    
+    
+    
+<%}%>
 
 
 
@@ -145,6 +200,7 @@
 
 
                                 </table>
+                                
                                         <input type="submit" name="nieuw">
                                                                         </form>
 
