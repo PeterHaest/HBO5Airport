@@ -52,18 +52,30 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-	<a class="navbar-brand" href="index.jsp" title="HOME"><i class="ion-paper-airplane"></i> Java <span>travel</span></a>
+	<%session = request.getSession();
+                                String url= "";
+                                if ("Admin".equals(session.getAttribute("paswoord"))) {
+                                   url = "StartAdmin.jsp";}
+                                else if("Director".equals(session.getAttribute("paswoord"))){
+                                   url = "StartDirector.jsp";}
+                                else{
+                                    url = "index.jsp";}%>
+
+                                    <a class="navbar-brand" href="<%=url%>" title="HOME"><i class="ion-paper-airplane"></i> Java <span>travel</span></a>
                         </div> 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
+                            <%if("Director".equals(session.getAttribute("paswoord"))){%>
+                                        <li><a href="ZoekServlet?Zoeken=statistieken">Statistieken</a></li>
+                                            <%}%>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vluchtoverzicht <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Inkomende vluchten</a></li>
-                                            <li><a href="#">Uitgaande vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=inkomend">Inkomende vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=uitgaand">Uitgaande vluchten</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#"> Zoeken </a></li>   
+                                    <li><a href="zoektest.jsp"> Zoeken </a></li>      
                                     <li><a href="LoginPage.jsp"><i class="ion-person"></i>${status}</a></li>
 				</ul> 
 		    </div>
@@ -74,8 +86,9 @@
                                 </div>
                                 <form  action="AdminServlet?choice=PasVlucht" method="Post">
                                 <div class="form-group"> 
+                                    <h1 class="tour section-wrapper container section-title">Overzicht van passagiers per vlucht.</h1>
                                     <label for="LstVluchten">kies een vlucht</label>
-                                    <select onchange="this.form.submit()" class="form-control" name="LstVluchten" style="width: 50%; margin: 15px">
+                                    <select onchange="this.form.submit()" class="form-control select" name="LstVluchten">
                                         <option selected="true"></option>
                                          <%ArrayList<String> lijst =(ArrayList<String>) session.getAttribute("lijstvluchten");%>
                                             <%for (String item : lijst) {%>

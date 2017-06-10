@@ -19,6 +19,7 @@
  
     <jsp:attribute name="content">
       <div class="row">
+
         <div class="col-sm-2">
             <nav class="nav-sidebar">
                 
@@ -35,21 +36,10 @@
                                             <li class="active"><a href="AdminServlet?page=hangars">hangars en vliegtuigen in hangars</a></li>
                                             <li class="active"><a href="AdminServlet?page=vlucht">nieuwe vlucht opstellen</a></li>
                                         </ul>
-                                        
+
             </nav>
-            
-            
-         
-            
-            
         </div>
     </div>  
-        <div> 
-        
-      
-      
-      
-      
-      </div>  
+ 
     </jsp:attribute>
 </template:siteTemplate>

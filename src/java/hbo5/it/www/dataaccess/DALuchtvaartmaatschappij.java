@@ -48,6 +48,23 @@ public DALuchtvaartmaatschappij (String url, String login, String password, Stri
         }
         return lijst;
     }
+    public Luchtvaartmaatschappij get_luchtvaartmaatschapijen_by_id(int luchtvaartmaatschappij_id){
+        Luchtvaartmaatschappij L = new Luchtvaartmaatschappij();
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        try {
+            statement = connection.prepareStatement("Select * from luchtvaartmaatschappij where luchtvaartmaatschappij.id = ?");
+            statement.setInt(1, luchtvaartmaatschappij_id);
+            set = statement.executeQuery();
+            while (set.next()) {
+                L.setId(set.getInt("id"));
+                L.setNaam(set.getString("naam"));
+                
+            }
+        } catch (Exception e) {
+        }
+        return L;
+    }
     
     public ArrayList<String> Get_Names(){
         ArrayList<String> lijst = new ArrayList<>();

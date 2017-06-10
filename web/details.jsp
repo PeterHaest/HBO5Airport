@@ -5,7 +5,7 @@
     Author     : steve
 --%>
 
-<%@page import="hbo5.it.www.beans.Luchthaven"%>
+<%@page import="hbo5.it.www.beans.Passagier"%>
 <%@page import="hbo5.it.www.beans.Vlucht"%>
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +27,8 @@
       
 </head>
     <body>
-        
+        <%ArrayList<Passagier> resultaat = 
+        (ArrayList<Passagier>) request.getAttribute("passagiers");%>
         <div>
         <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -71,49 +72,35 @@
 	  	</div><!-- /.container -->
 	</nav>
         </div>
-        <section class="tour section-wrapper container">
+        <section class="tour section-wrapper col-md-offset-2">
             <!--for demo wrap-->
-            <h2 class="tour section-title">Inkomende vluchten</h2>
-            <p class="tour section-subtitle">Een overzicht van alle inkomende vluchten per luchthaven.</p>
-            <form action="ZoekServlet">
-                    <label for="Luchthaven">kies een luchthaven</label>
-                        <select onchange="this.form.submit()" class="form-control select" name="Luchthaven">
-                            <option selected="true" value ="0"></option>
-                            <%ArrayList<Luchthaven> lijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
-                            <%for (Luchthaven item : lijst) {%>
-                                <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
-                                <%}%>
-                        </select>
-        </section>                       
-            <section class="tour section-wrapper tablecontainer">
-            <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
-                    <thead>              
-                        <tr>
-                            <th>Vluchtnummer</th>
-                            <th>Vertrek</th>
-                            <th>Aankomst</th>
-                            <th>Aankomsttijd</th>
-                        </tr>
-                    </thead>
-                <tbody>
-            </section>
-                <%ArrayList<Vlucht> resultaat = 
-                (ArrayList<Vlucht>) request.getAttribute("vluchten");
-
-		for (Vlucht vlucht: resultaat){%>
-                <form action="">
-                <tr>
-                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
-                    <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomsttijd() %></td>
-                    <td><button name="Boeken" value="<%=vlucht.getId()%>" type="submit">Boeken</button></td>
-                </tr>
-                </form>
+            <h1 class="tour section-wrapper container">Details voor vlucht met vluchtnummer ${vlucht.code}:</h1>
+            <h2>Vlucht</h2>
+            <p><b>Vluchtnummer:</b> ${vlucht.code}</p>
+            <p><b>Aankomstluchthaven:</b> ${vlucht.aankomstluchthaven.naam}</p>
+            <p><b>Vertrekluchthaven:</b> ${vlucht.vertrekluchthaven.naam}</p>
+            <p><b>Luchtvaartmaatschappij:</b> ${vlucht.luchtvaarmaatschappij.naam}</p>
+            <p><b>Vliegtuigtype:</b> ${vlucht.vliegtype.naam}</p>
+            <%  int teller = 0;
+                for (Passagier passagier : resultaat){ teller ++;}%>
+            <p><b>Aantal Passagiers:</b> <%=teller%> </p>
+            
+            <h2>Passagiers</h2>
+            <ol>
+            
+                <%if (resultaat.isEmpty()) {%>
+                <p><b>! Er zijn nog geen passagiers voor deze vlucht !</b></p>
+                <%}%>
+		<%for (Passagier passagier : resultaat){%>
                 
-		<%}%>
-            </tbody>
-            </table>
+                <li><b>Naam:</b> <%=passagier.getPersoon().getVoornaam()%> <%=passagier.getPersoon().getFamilienaam()%> 
+                    </br> <b>Straat:</b> <%=passagier.getPersoon().getStraat()%> <%=passagier.getPersoon().getHuisnr()%> 
+                    </br> <b>Woonplaats:</b> <%=passagier.getPersoon().getPostcode()%> <%=passagier.getPersoon().getWoonplaats()%> 
+                    </br> <b>Geboortedatum:</b> <%=passagier.getPersoon().getGeboortedatum()%></li>
+                </br>
+            <%}%>
+            </ol>
+            </section>
 
 
 

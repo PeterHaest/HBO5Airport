@@ -5,6 +5,8 @@
     Author     : steve
 --%>
 
+<%@page import="hbo5.it.www.beans.Luchtvaartmaatschappij"%>
+<%@page import="hbo5.it.www.beans.Passagier"%>
 <%@page import="hbo5.it.www.beans.Luchthaven"%>
 <%@page import="hbo5.it.www.beans.Vlucht"%>
 <%@page import="java.util.ArrayList"%>
@@ -27,7 +29,8 @@
       
 </head>
     <body>
-        
+        <%ArrayList<Passagier> resultaat = 
+        (ArrayList<Passagier>) request.getAttribute("passagiers");%>
         <div>
         <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -73,52 +76,69 @@
         </div>
         <section class="tour section-wrapper container">
             <!--for demo wrap-->
-            <h2 class="tour section-title">Inkomende vluchten</h2>
-            <p class="tour section-subtitle">Een overzicht van alle inkomende vluchten per luchthaven.</p>
+            <h2 class="tour section-title">Statistieken</h2>
+            <p class="tour section-subtitle">Een overzicht van enkele statistieken ivm vluchten.</p>
+            <%  int teller = 0;
+                for (Passagier passagier : resultaat){ teller ++;}%>
+            <h3> Aantal passagiers ${optie}: <%=teller%> Passagiers</h3>
+            
             <form action="ZoekServlet">
-                    <label for="Luchthaven">kies een luchthaven</label>
-                        <select onchange="this.form.submit()" class="form-control select" name="Luchthaven">
+                    <label for="Luchthaven">Aantal passagiers per luchthaven opvragen.</label>
+                        <select class="form-control select" name="Luchthaven">
                             <option selected="true" value ="0"></option>
                             <%ArrayList<Luchthaven> lijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
                             <%for (Luchthaven item : lijst) {%>
                                 <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
                                 <%}%>
                         </select>
-        </section>                       
-            <section class="tour section-wrapper tablecontainer">
-            <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
-                    <thead>              
-                        <tr>
-                            <th>Vluchtnummer</th>
-                            <th>Vertrek</th>
-                            <th>Aankomst</th>
-                            <th>Aankomsttijd</th>
-                        </tr>
-                    </thead>
-                <tbody>
-            </section>
-                <%ArrayList<Vlucht> resultaat = 
-                (ArrayList<Vlucht>) request.getAttribute("vluchten");
-
-		for (Vlucht vlucht: resultaat){%>
-                <form action="">
-                <tr>
-                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
-                    <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomsttijd() %></td>
-                    <td><button name="Boeken" value="<%=vlucht.getId()%>" type="submit">Boeken</button></td>
-                </tr>
-                </form>
-                
-		<%}%>
-            </tbody>
-            </table>
-
-
-
-
-
+                        <input type="submit" name="Search" value="Luchthaven">
+            </form>
+                        
+            <form action="ZoekServlet">
+                    <label for="Luchthaven">Aantal passagiers per vlucht opvragen.</label>
+                        <select class="form-control select" name="Vlucht">
+                            <option selected="true" value ="0"></option>
+                            <%ArrayList<Vlucht> lijst2 =(ArrayList<Vlucht>) session.getAttribute("lijstvluchten");%>
+                            <%for (Vlucht item : lijst2) {%>
+                                <option value="<%=item.getId()%>" ><%=item.getCode()%></option>
+                                <%}%>
+                        </select>
+                        <input type="submit" name="Search" value="Vlucht">
+            </form>
+                        
+            <form action="ZoekServlet">
+                    <label for="Luchthaven">Aantal passagiers per luchtvaartmaatschappij opvragen.</label>
+                        <select class="form-control select" name="luchtvaartmaatschappij">
+                            <option selected="true" value ="0"></option>
+                            <%ArrayList<Luchtvaartmaatschappij> lijst3 =(ArrayList<Luchtvaartmaatschappij>) session.getAttribute("lijstluchtvaartmaatschappijen");%>
+                            <%for (Luchtvaartmaatschappij item : lijst3) {%>
+                                <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+                                <%}%>
+                        </select>
+                        <input type="submit" name="Search" value="Luchtvaartmaatschappij">
+            </form>
+                        
+            <form action="ZoekServlet">
+                    <label for="Luchthaven">Aantal passagiers per dag opvragen.</label>
+                        <input name="date" type="date" class="form-control border-radius border-right" style="width:20%"/>
+                        <input type="submit" name="Search" value="Dag">
+            </form>   
+                        
+            <h3> Gemiddelde Leeftijd Passagiers per bestemming: ${totaleleeftijd}</h3>
+            <form action="ZoekServlet">
+                    <label for="Luchthaven">Bestemming kiezen.</label>
+                        <select class="form-control select" name="Gemiddelde">
+                            <option selected="true" value ="0"></option>
+                            <%ArrayList<Luchthaven> lijst4 =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
+                            <%for (Luchthaven item : lijst4) {%>
+                                <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+                                <%}%>
+                        </select>
+                        <input type="submit" name="Search" value="Gemiddelde">
+            </form>
+                        
+        </section>
+                        
        
        <footer>
            <div class="container">

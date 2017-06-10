@@ -642,6 +642,8 @@ footer a:hover, footer a:focus{
 .tablecontainer th:nth-child(4) { display: none; }
 }
 
+
+
 /*=================================================
 ||				15. Footer
 ==================================================*/
@@ -686,4 +688,13 @@ body {
   left: 0;
   padding: 1rem;
   text-align: center;
+}
+
+.select {
+    width: 20%;
+    margin: 15px;
+}
+
+.date {
+    display: none;
 }

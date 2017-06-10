@@ -103,14 +103,18 @@ public class LoginServlet extends HttpServlet {
                          rd = request.getRequestDispatcher("/AdminServlet");
                          rd.forward(request, response);
                     }
+                    if (session.getAttribute("username").equals("Director")) {
+                         rd = request.getRequestDispatcher("StartDirector.jsp");
+                         rd.forward(request, response);
+                    }
                     session.setAttribute("Crew",dapersoon.CheckIfCrew(Persoon) );
+                            
                
-               
-           }
+                }
                 else {
                     rd = request.getRequestDispatcher("LoginPage.jsp");
                     rd.forward(request, response);
-           }
+                }
            
    
 }

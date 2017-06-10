@@ -17,6 +17,15 @@ public class Passagier {
     private String plaats;
     private int vlucht_id;
     private int persoon_id;
+    private Persoon persoon;
+
+    public Persoon getPersoon() {
+        return persoon;
+    }
+
+    public void setPersoon(Persoon persoon) {
+        this.persoon = persoon;
+    }
 
     public int getId() {
         return id;

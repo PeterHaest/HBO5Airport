@@ -9,14 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <style>
-        .footer{
-            position:absolute;
-    	width:100%;
-        bottom:0;
-    	height:60px;
-        }
-    </style>
     <head>
 		<!-- meta -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +27,6 @@
 </head>
     <body>
         
-        <div>
         <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
                         <div class="navbar-header">
@@ -45,7 +36,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-	  <%session = request.getSession();
+                            <%session = request.getSession();
                             String url= "";
                                 if ("Admin".equals(session.getAttribute("paswoord"))) {
                                    url = "StartAdmin.jsp";}
@@ -58,19 +49,23 @@
                         </div> 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
+                            <%if("Director".equals(session.getAttribute("paswoord"))){%>
+                                        <li><a href="ZoekServlet?Zoeken=statistieken">Statistieken</a></li>
+                                            <%}%>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vluchtoverzicht <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Inkomende vluchten</a></li>
-                                            <li><a href="#">Uitgaande vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=inkomend">Inkomende vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=uitgaand">Uitgaande vluchten</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#"> Zoeken </a></li>   
+                                    <li><a href="zoektest.jsp"> Zoeken </a></li>     
                                     <li><a href="LoginPage.jsp"><i class="ion-person"></i>${status}</a></li>
 				</ul> 
 		    </div>
 	  	</div>
 	</nav>
+
  
   
                                 </div>
@@ -135,6 +130,7 @@
                                     
                                 </div>
        </div>
+
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
            

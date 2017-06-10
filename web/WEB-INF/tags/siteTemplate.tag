@@ -13,14 +13,6 @@
 <%@ attribute name="footer" fragment="true"%>
 
 <html>
-    <style>
-        .footer{
-            position:absolute;
-    	width:100%;
-        bottom:0;
-    	height:60px;
-        }
-    </style>
     <head>
 		<!-- meta -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,14 +62,17 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
+                                    <%if("Director".equals(session.getAttribute("paswoord"))){%>
+                                        <li><a href="ZoekServlet?Zoeken=statistieken&Search=Luchthaven">Statistieken</a></li>
+                                            <%}%>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vluchtoverzicht <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="ZoekServlet">Inkomende vluchten</a></li>
-                                            <li><a href="uitgaand.jsp">Uitgaande vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=inkomend">Inkomende vluchten</a></li>
+                                            <li><a href="ZoekServlet?Zoeken=uitgaand">Uitgaande vluchten</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#"> Zoeken </a></li>   
+                                    <li><a href="zoektest.jsp"> Zoeken </a></li>   
                                     <li><a href="LoginPage.jsp"><i class="ion-person"></i>${status}</a></li>
 				</ul> <!-- /.nav -->
 		    </div><!-- /.navbar-collapse -->
@@ -88,8 +83,18 @@
         
        
        <footer>
-           <p>Project gemaakt door team 2 (Steve Dekerf, Tijs Torfs en Peter Haest)</p>
-           
+           <div class="container">
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="text-left">
+						&copy; Copyright Java Travels
+					</div>
+				</div>
+				<div class="col-xs-4">
+					Project gemaakt door team 2 (Steve Dekerf, Tijs Torfs en Peter Haest)
+				</div>
+			</div>
+		</div>	
        </footer>
 <jsp:invoke fragment="footer"></jsp:invoke>
 
