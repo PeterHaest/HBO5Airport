@@ -65,7 +65,9 @@
  
   
                                 </div>
-                                <form  action="AdminServlet?choice=maatschappij" method="POST">
+
+                                <form  action="AdminServlet?choice=luchtvaartmaatschappij" method="POST">
+
                                 <div class="form-group"> 
                                     <label for="LstMaatschappij">kies een maatschappij</label>
                                     <select onchange="this.form.submit()" class="form-control" name="LstMaatschappij" style="width: 50%; margin: 15px">
@@ -86,13 +88,18 @@
                                         <div>
                                             <label for="txtId">id</label>
                                             <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
+
+                                            <%session.setAttribute("txtid", L.getId());%>
+
                                             <label for="txtNaam">Naam</label>
                                             <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
                                          <%}%> 
                                         </div>
-                                            <td><a href=AdminServlet?choice=add&kind=maatschappij>Nieuwe Luchthavenmaatschappij</a></td>
-                                            <td><a href=AdminServlet?choice=update&kind=maatschappij>Gegevens wijzigen</td>
-                                            <td><a href=AdminServlet?choice=delete&kind=maatschappij>wissen</td>
+
+                                            <td><a href=AdminServlet?choice=add&kind=luchtvaartmaatschappij>Nieuwe Luchthavenmaatschappij</a></td>
+                                            <td><a href=AdminServlet?choice=update&kind=luchtvaartmaatschappij>Gegevens wijzigen</td>
+                                            <td><a href=AdminServlet?choice=delete&kind=luchtvaartmaatschappij>wissen</td>
+
                                     </form>
                                   
                                     

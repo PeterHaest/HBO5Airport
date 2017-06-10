@@ -74,9 +74,11 @@
  
   
                                 </div>
+
                                 <div class="container text-center">
                                 <form  action="AdminServlet?choice=Haven" method="POST">
                                     <div class="mx-auto">
+
                                 <div class="form-group"> 
                                     <label for="LstHaven">kies een luchthaven</label>
                                     <select onchange="this.form.submit()" class="form-control" name="LstHaven" style="width: 50%; margin: 15px">
@@ -86,7 +88,9 @@
                                             <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
                                            <%}%>
                                     </select>
+
                                     </div>       
+
                                 </div>           
                                            <%if (request.getAttribute("Luchthaven") != null) {%>
    
@@ -98,13 +102,16 @@
                                          <%session = request.getSession();
                                          session.setAttribute("ChosenHaven", L);%>
                                          
+
                                          <div class="container-fluid" >
                                             <label for="txtId" class="">id</label>
                                             <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
+
                                             <label for="txtNaam">Naam</label>
                                             <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
                                             <label for="txtStad">Stad</label>
                                             <input type="text" name="txtStad" value="<%=L.getStad()%>"/>
+
                                         </div>
                                              <%}%>  
                                              <div class="mt-10">
@@ -112,6 +119,7 @@
                                              <button><a href=AdminServlet?choice=update&kind=haven>Gegevens wijzigen</a></button>
                                              <button><a href=AdminServlet?choice=delete&kind=haven>wissen</a></button>
                                             </div>
+
                                     </form>
                                  
                                     

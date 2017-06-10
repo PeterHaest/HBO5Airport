@@ -98,7 +98,9 @@
                                     <%}%>
                                     <% if(session.getAttribute("ChosenHaven") != null) {
                                         Luchthaven LH = (Luchthaven) session.getAttribute("ChosenHaven");
-                                        session.setAttribute("newItem", "haven"); %>
+
+                                        session.setAttribute("newItem", "Luchthaven"); %>
+
 <table>
                                     <th>id</th>
                                     <th>naam</th>

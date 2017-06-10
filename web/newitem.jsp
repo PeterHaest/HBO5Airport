@@ -5,11 +5,13 @@
     Author     : steve
 --%>
 
+
 <%@page import="java.util.AbstractList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.util.Map"%>
 <%@page import="hbo5.it.www.beans.Bemanningslid"%>
+
 <%@page import="java.time.ZonedDateTime"%>
 <%@page import="java.util.Calendar"%>
 
@@ -81,16 +83,20 @@
   
                                 </div>
                                 <form action="AdminServlet?choice=submit" method="get" >
+
                                    <div class="container">
      <table class="table table-responsive table-striped ">
          <thead class="thead-inverse">
              <tr>
+
                                     <th>id</th>
                                     <th>naam</th>
                                     <%if ("lease".equals(request.getParameter("kind"))) {%>
                                     <%session.setAttribute("newItem", "Lease");%>
+
              </tr>
          </thead>
+
                                     <tr>
                                             <td><input type="text" name="txtid" readonly="true" value="<%=request.getAttribute("topId")%>"/> </td>
                                             <td><input  type="text" name="txtnaam" id="Naam" /></td> 
@@ -99,8 +105,10 @@
                                  
    
 
-                                    <% if ("haven".equals(request.getParameter("kind"))){ 
-                                        session.setAttribute("newItem", "Haven");
+
+                                    <% if ("Luchthaven".equals(request.getParameter("kind"))){ 
+                                        session.setAttribute("newItem", "Luchthaven");
+
                                     %>
                                             
                                             <th>stad</th>
@@ -111,8 +119,10 @@
                                             </tr>
                                        <%}%>     
                                             
-                                       <%if ("maatschappij".equals(request.getParameter("kind"))) {
-                                           session.setAttribute("newItem", "maatschappij");%>
+
+                                       <%if ("luchtvaartmaatschappij".equals(request.getParameter("kind"))) {
+                                           session.setAttribute("newItem", "luchtvaartmaatschappij");%>
+
 <tr>
                                             <td><input type="text" name="txtid" readonly="true" value="<%=request.getAttribute("topId")%>"/> </td>
                                             <td><input  type="text" name="txtnaam" id="Naam" /></td> 
@@ -135,6 +145,9 @@
                                             </td> 
                                             <td>
                                                 <select name="LstLease">
+
+                                                    <option value="null"> niet in lease</option>
+
                                                     <% ArrayList<Leasemaatschappij> lijst = (ArrayList<Leasemaatschappij>) session.getAttribute("maatschappijen");
                                                     for (Leasemaatschappij item : lijst) {%>
                                                     <option value="<%=item.getId()%>"> <%=item.getNaam()%> </option>
@@ -153,13 +166,17 @@
 <%}%>
 <%if("vlucht".equals(request.getParameter("kind"))){%>
      <%session.setAttribute("newItem", "vlucht");%>
-     
-   
+
+<table>
+    <th>id</th>
+    <th>code</th>
+
     <th>vertrekdatum</th>
     <th>Aankomst</th>
     <th>Vliegtuigtype</th>
     <th>vertrekluchthaven</th>
     <th>aankomstluchthaven</th>
+
     </tr>
 </thead>
 <tbody>
@@ -173,6 +190,7 @@
         <td><input type="date" name="txtAankomst" class="form-control text-center text-uppercase"></td>
         <td>
              <select name="LstType" class="form-control  text-center text-uppercase">
+
                                                     <% ArrayList<Vliegtuigtype> vlieglijst = (ArrayList<Vliegtuigtype>) session.getAttribute("lijstTypes");
                                                     for (Vliegtuigtype item : vlieglijst) {
                                                     %>
@@ -183,6 +201,7 @@
         </td>
            <td>
                <select name="LstVertrek" class="form-control ">
+
                                         <option ></option>
                                         <%ArrayList<Luchthaven> luchtlijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
                                         <%for (Luchthaven item : luchtlijst) {%>
@@ -191,7 +210,9 @@
                                     </select>
                                             </td>
                                                <td>
+
                                                 <select name="LstAankomst" class="form-control ">
+
                                         <option></option>
                                         
                                         <%for (Luchthaven item : luchtlijst) {%>
@@ -199,6 +220,7 @@
                                            <%}%>
                                     </select>
                                             </td>
+
                                     <!--       <td>
                                                 <%ArrayList<Luchtvaartmaatschappij> lijstmaatschappijen = (ArrayList < Luchtvaartmaatschappij >)session.getAttribute("lijstmaatschappijen");%>
                                                 <select name="maatschappij">
@@ -241,6 +263,7 @@
                                         </div>   
                                                                         </form>
  </div>   
+
 
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
