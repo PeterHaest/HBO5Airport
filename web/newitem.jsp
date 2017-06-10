@@ -5,6 +5,11 @@
     Author     : steve
 --%>
 
+<%@page import="java.util.AbstractList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.Map"%>
+<%@page import="hbo5.it.www.beans.Bemanningslid"%>
 <%@page import="java.time.ZonedDateTime"%>
 <%@page import="java.util.Calendar"%>
 
@@ -76,12 +81,16 @@
   
                                 </div>
                                 <form action="AdminServlet?choice=submit" method="get" >
-                                    
-                                <table>
+                                   <div class="container">
+     <table class="table table-responsive table-striped ">
+         <thead class="thead-inverse">
+             <tr>
                                     <th>id</th>
                                     <th>naam</th>
                                     <%if ("lease".equals(request.getParameter("kind"))) {%>
                                     <%session.setAttribute("newItem", "Lease");%>
+             </tr>
+         </thead>
                                     <tr>
                                             <td><input type="text" name="txtid" readonly="true" value="<%=request.getAttribute("topId")%>"/> </td>
                                             <td><input  type="text" name="txtnaam" id="Naam" /></td> 
@@ -144,22 +153,26 @@
 <%}%>
 <%if("vlucht".equals(request.getParameter("kind"))){%>
      <%session.setAttribute("newItem", "vlucht");%>
-<table>
-    <th>id</th>
-    <th>code</th>
+     
+   
     <th>vertrekdatum</th>
     <th>Aankomst</th>
     <th>Vliegtuigtype</th>
     <th>vertrekluchthaven</th>
     <th>aankomstluchthaven</th>
-    
+    </tr>
+</thead>
+<tbody>
     <tr>
-        <td><input type="text" readonly="true" name="txtid" value="<%=request.getAttribute("topId")%>"> </td>
-        <td><input type="text" name="txtCode"></td>
-        <td><input type="date" name="txtVertrek"  ></td>
-        <td><input type="date" name="txtAankomst"></td>
+<div>       
+        <td ><input class="text-capitalize text-center form-control" type="text" readonly="true" name="txtid" value="<%=request.getAttribute("topId")%>"> </td>
+        <td><input type="text" name="txtCode" class="form-control"></td>
+
+        <td><input type="date" name="txtVertrek" class="form-control text-center text-uppercase" ></td>
+        </div>
+        <td><input type="date" name="txtAankomst" class="form-control text-center text-uppercase"></td>
         <td>
-             <select name="LstType">
+             <select name="LstType" class="form-control  text-center text-uppercase">
                                                     <% ArrayList<Vliegtuigtype> vlieglijst = (ArrayList<Vliegtuigtype>) session.getAttribute("lijstTypes");
                                                     for (Vliegtuigtype item : vlieglijst) {
                                                     %>
@@ -169,7 +182,7 @@
                                                 </select>
         </td>
            <td>
-                                                <select name="LstVertrek">
+               <select name="LstVertrek" class="form-control ">
                                         <option ></option>
                                         <%ArrayList<Luchthaven> luchtlijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
                                         <%for (Luchthaven item : luchtlijst) {%>
@@ -178,7 +191,7 @@
                                     </select>
                                             </td>
                                                <td>
-                                                <select name="LstAankomst">
+                                                <select name="LstAankomst" class="form-control ">
                                         <option></option>
                                         
                                         <%for (Luchthaven item : luchtlijst) {%>
@@ -186,24 +199,48 @@
                                            <%}%>
                                     </select>
                                             </td>
+                                    <!--       <td>
+                                                <%ArrayList<Luchtvaartmaatschappij> lijstmaatschappijen = (ArrayList < Luchtvaartmaatschappij >)session.getAttribute("lijstmaatschappijen");%>
+                                                <select name="maatschappij">
+                                                    <option></option>   
+                                                    <%for (Luchtvaartmaatschappij item : lijstmaatschappijen) {%>
+                                                         <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+<%}%> -->
+                                                </select>
+                                            </td>
     </tr>
-    
+    </tbody>
 </table>
-    
-    
-    
+
+                                                
+                                              
+                                                <table class="table">   
+                                       <%Map<Integer,ArrayList<String>> nMap = (Map<Integer,ArrayList<String>>) session.getAttribute("lijstBemanning");%>
+                                      
+                                       <%for (Map.Entry<Integer,ArrayList<String>> entry : nMap.entrySet()) {%>
+                                       <%ArrayList<String> list = entry.getValue();%>
+                                       <tr>
+                                           <td><%=entry.getKey()%></td>
+                                         
+                                           <%for (String elem : list) {%>
+                                           <td><%=elem%></td>
+                                           <%}%>
+                                           
+                                           <td><input type="checkbox" name="<%=entry.getKey()%>" id="Onflight"  ></td>
+                                       </tr>    
 <%}%>
+    </table>   
 
-
-
-
-
-
-                                </table>
-                                
-                                        <input type="submit" name="nieuw">
+                                                      
+    
+    
+    
+               <%}%>                     
+               <div class="container text-center"> 
+                   <input type="submit" name="nieuw" class="btn-lg ">
+                                        </div>   
                                                                         </form>
-
+ </div>   
 
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>

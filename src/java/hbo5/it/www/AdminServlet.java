@@ -6,12 +6,14 @@
 package hbo5.it.www;
 
 
+import hbo5.it.www.beans.Bemanningslid;
 import hbo5.it.www.beans.Crew;
 import hbo5.it.www.beans.Hangar;
 import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Passagier;
 import hbo5.it.www.beans.Persoon;
 import hbo5.it.www.beans.Vlucht;
+import hbo5.it.www.dataaccess.DABemanningslid;
 import hbo5.it.www.dataaccess.DAHangar;
 import hbo5.it.www.dataaccess.DALeasemaatschappij;
 import hbo5.it.www.dataaccess.DALuchthaven;
@@ -30,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -65,6 +68,7 @@ public class AdminServlet extends HttpServlet {
         private DAVlucht davlucht = null;
         private DAPassagier dapassagier = null;
         private DAVliegtuigtype datype = null;
+        private DABemanningslid dabemanning = null;
         
         
         
@@ -103,6 +107,9 @@ public class AdminServlet extends HttpServlet {
             if (datype == null) {
                 datype = new DAVliegtuigtype(url, login, password, driver);
             }
+            if (dabemanning == null) {
+                dabemanning = new DABemanningslid(url, login, password, driver);
+            }
         }catch (ClassNotFoundException | SQLException e) {
             throw new ServletException(e);
         }
@@ -137,6 +144,9 @@ public class AdminServlet extends HttpServlet {
             }
             if (datype != null) {
                 datype.close();
+            }
+            if(dabemanning != null){
+                dabemanning.close();
             }
         } catch (SQLException e) {
         }}
@@ -179,8 +189,8 @@ public class AdminServlet extends HttpServlet {
               session.setAttribute("lijsthavens",  daLuchthaven.getLuchthavens());
               session.setAttribute("lijstmaatschappijen",damaatschappij.get_luchtvaartmaatschapijen());
               session.setAttribute("lijstpersonen", dapersoon.get_names());
-              
               session.setAttribute("lijstLease",dalease.get_leaseNamen());
+              
             
    
         if (request.getParameter("btnWijzig")!= null) {
@@ -223,6 +233,7 @@ public class AdminServlet extends HttpServlet {
                 url = "overzichtHangars.jsp";
             }
             else if ("vlucht".equals(request.getParameter("page"))){
+                session.setAttribute("lijstBemanning", dabemanning.getAll());
                 request.setAttribute("topId", dalease.getTopId("vlucht"));   
                 url = "newitem.jsp?kind=vlucht";
             }
@@ -324,10 +335,6 @@ public class AdminServlet extends HttpServlet {
                      } catch (ParseException ex) {
                          Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                      }
-                       
-                       
-                       
-                       
                        nMap.clear();
                        nMap.put("1", id);
                        nMap.put("2", request.getParameter("txtCode"));
@@ -337,7 +344,33 @@ public class AdminServlet extends HttpServlet {
                        nMap.put("6", request.getParameter("LstVertrek"));
                        nMap.put("7", request.getParameter("LstAankomst"));
                        
+                       
+                       
+                    Integer teller = 1;
+                    List<Integer> lijst = new LinkedList<>();
+                       while (teller <= dabemanning.getAll().keySet().size()) {                           
+                          
+                           if (request.getParameter(teller.toString()) != null) {
+                              lijst.add(teller);
+                           }
+                         
+                            teller ++;
+                       }
                        davliegtuig.Add_Row( nMap, (String) session.getAttribute("newItem"));
+                       for (Integer integer : lijst) {
+                           Bemanningslid b = dabemanning.getById(integer.intValue());
+                           nMap.clear();
+                           nMap.put("1",dalease.getTopId("vluchtbemanning"));
+                           nMap.put("2",dabemanning.getFunctiebyid(b.getFunctie_id()));
+                           nMap.put("3", b.getId());
+                           nMap.put("4", id );
+                          davliegtuig.Add_Row(nMap, "vluchtbemanning");
+                       }
+                
+                       
+                       
+                       
+                       
                  url="AdminServlet?page=vlucht";
              }
                    
