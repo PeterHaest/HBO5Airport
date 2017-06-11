@@ -491,7 +491,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          b.append("where v.id = ");
          try {
              Integer teller = 1;
-             statement = connection.prepareStatement("select Vlucht_id from passagier where persoon_id = ?");
+             statement = connection.prepareStatement("select Vlucht_id, id from passagier where persoon_id = ?");
              statement.setInt(1, id);
              set = statement.executeQuery();
              while(set.next()){
@@ -502,6 +502,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
                      
                      while (set2.next()) {
                         ArrayList<String> lijst = new ArrayList<>();
+                        
                         lijst.add(set2.getString(1));
                          lijst.add(set2.getString(2));
                          lijst.add(set2.getString(3));

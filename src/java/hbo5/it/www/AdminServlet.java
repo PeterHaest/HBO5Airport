@@ -332,6 +332,13 @@ public class AdminServlet extends HttpServlet {
                   url="deleteitem.jsp";
 
             } 
+                   if ("Passagier".equals(request.getParameter("kind"))) {
+                      session.setAttribute("L", null);
+                     session.setAttribute("ChosenHaven", null);
+                     session.setAttribute("Vlucht", request.getParameter("vluchtid"));
+                  url="deleteitem.jsp";
+
+            } 
         }
              else if (request.getParameter("nieuw") != null) {
                  Integer id = Integer.parseInt( request.getParameter("txtid"));
@@ -483,8 +490,16 @@ public class AdminServlet extends HttpServlet {
                       obj = "luchthaven";
                        url="AdminServlet?page=luchthavens";
                   }
-                  dalease.DeleteItem(obj,Integer.parseInt( request.getParameter("txtid")) );
-
+            if (obj != null) {
+                 dalease.DeleteItem(obj,Integer.parseInt( request.getParameter("txtid")) );
+            }
+                 
+            if ("Passagier".equals(session.getAttribute("delItem"))) {
+                obj = "Passagier";
+                url ="ZoekServlet?choice=huidigeVluchten";
+                dalease.deletePas((String)session.getAttribute("Vlucht"), (String) session.getAttribute("id"));
+            }
+            
              }
              
             else{

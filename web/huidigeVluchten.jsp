@@ -85,6 +85,7 @@
                                  
                                     <table class="table table-responsive">
     <thead>
+    <th>passagier id</th>
     <th>vlucht id</th>
     <th>vlucht Code</th>
     <th>Vliegtuigtype</th>
@@ -109,6 +110,9 @@
                                            <%}%>
                                            <%if (request.getAttribute("toekomst").equals("1") ) {%>
                                            <td> <button value="<%=entry.getKey()%>"><a href="ZoekServlet?choice=Book&vluchtid=<%=VluchtId%>">boeken</a></button></td>
+<%}%>
+<%if (request.getAttribute("toekomst").equals("0") ) {%>
+   <td> <button value="<%=entry.getKey()%>"><a href="AdminServlet?choice=delete&kind=Passagier&vluchtid=<%=VluchtId%>">annuleren</a></button></td>
 <%}%>
                                        </tr>
                                        <%}%>
