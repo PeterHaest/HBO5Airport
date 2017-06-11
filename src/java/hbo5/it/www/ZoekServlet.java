@@ -317,11 +317,19 @@ public class ZoekServlet extends HttpServlet {
                         totaleleeftijd += today.getYear() - year;
                         teller++;
                     }
+                    if (passagiers.isEmpty()){
+                        totaleleeftijd = 0;
+                    }
+                    else {
                     totaleleeftijd = totaleleeftijd/teller;
+                    }
                     Luchthaven l = daluchthaven.getLuchthaven("1");
+                    Luchthaven l2 = daluchthaven.getLuchthaven(request.getParameter("Gemiddelde"));
+                    String optie2 = " met bestemming "+ l2.getNaam();
                     String optie = " bij vluchten met aankomstluchthaven " + l.getNaam();
                     request.setAttribute("passagiers", passagiers);
                     request.setAttribute("optie", optie);
+                    request.setAttribute("optie2", optie2);
                     request.setAttribute("totaleleeftijd", totaleleeftijd);
             }
             request.getRequestDispatcher("Statistieken.jsp").forward(request, response);
