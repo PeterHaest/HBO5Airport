@@ -5,6 +5,7 @@
     Author     : steve
 --%>
 
+<%@page import="hbo5.it.www.beans.Crew"%>
 <%@page import="hbo5.it.www.beans.Passagier"%>
 <%@page import="hbo5.it.www.beans.Vlucht"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,6 +30,8 @@
     <body>
         <%ArrayList<Passagier> resultaat = 
         (ArrayList<Passagier>) request.getAttribute("passagiers");%>
+        <%ArrayList<Crew> crew = 
+        (ArrayList<Crew>) request.getAttribute("crew");%>
         <%String hide = (String)request.getAttribute("hide");%> 
         <div>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -92,7 +95,28 @@
             <%  int teller = 0;
                 for (Passagier passagier : resultaat){ teller ++;}%>
             <p><b>Aantal Passagiers:</b> <%=teller%> </p>
-            
+            <p><b>Piloot:</b>
+                <%if (crew.isEmpty()) {%>
+                    Er is geen piloot aanwezig</p>
+                <%}%>
+                <%for (Crew lid : crew){
+                    if (lid.getFunctie() != null){
+                        if (lid.getFunctie().equals("piloot")){%>
+                        <%=lid.getNaam()%> <%=lid.getFamilienaam()%></p>
+                    <%}
+                    }
+                }%>
+        <p><b>Co-Piloot:</b>
+                <%if (crew.isEmpty()) {%>
+                    Er is geen co-piloot aanwezig</p>
+                <%}%>
+                <%for (Crew lid : crew){
+                    if (lid.getFunctie() != null){
+                        if (lid.getFunctie().equals("copiloot")){%>
+                        <%=lid.getNaam()%> <%=lid.getFamilienaam()%></p>
+                    <%}
+                    }
+                }%>
             <h2>Passagiers</h2>
             <ol>
             

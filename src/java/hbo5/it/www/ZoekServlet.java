@@ -5,6 +5,7 @@
  */
 package hbo5.it.www;
 
+import hbo5.it.www.beans.Crew;
 import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Luchtvaartmaatschappij;
 import hbo5.it.www.beans.Passagier;
@@ -250,6 +251,7 @@ public class ZoekServlet extends HttpServlet {
         else if (session.getAttribute("Search") == "details"){
             Vlucht v = davlucht.ZoekDetails(Integer.parseInt(request.getParameter("id")));
             ArrayList<Passagier> passagiers = dapassagier.Passagiers_per_vlucht(Integer.parseInt(request.getParameter("id")));
+            ArrayList<Crew> crew = davlucht.Crew_per_vlucht(v.getCode());
             String optie = request.getParameter("optie");
             String input = request.getParameter("input");
             String hide = request.getParameter("hide");
@@ -260,6 +262,7 @@ public class ZoekServlet extends HttpServlet {
             request.setAttribute("date", date);
             request.setAttribute("hide", hide);
             request.setAttribute("passagiers", passagiers);
+            request.setAttribute("crew", crew);
             request.getRequestDispatcher("details.jsp").forward(request, response);
         }
         else if (session.getAttribute("Search") == "statistieken"){
