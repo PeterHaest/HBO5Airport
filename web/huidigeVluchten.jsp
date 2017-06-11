@@ -85,7 +85,6 @@
                                  
                                     <table class="table table-responsive">
     <thead>
-    <th>passagier id</th>
     <th>vlucht id</th>
     <th>vlucht Code</th>
     <th>Vliegtuigtype</th>

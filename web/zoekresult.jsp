@@ -102,7 +102,7 @@
                                         <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
                                         <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
                                         <td><%=vlucht.getAankomsttijd() %></td>
-                                        <td><button name="Boeken" value="<%=vlucht.getId()%>" type="Boeken">Boeken</button></td>
+                                          <td> <button value="<%=vlucht.getId()%>"><a href="ZoekServlet?choice=Book&vluchtid=<%=vlucht.getId()%>">boeken</a></button></td>
                                     </tr>
                                 </form>
                             <%}%>
