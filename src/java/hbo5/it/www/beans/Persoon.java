@@ -5,12 +5,11 @@
  */
 package hbo5.it.www.beans;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 
-/**
- *
- * @author c1040604
- */
 public class Persoon {
     private int id;
     private String voornaam;
@@ -111,7 +110,28 @@ public class Persoon {
     public void setPaswoord(String paswoord) {
         this.paswoord = paswoord;
     }
+ 
+    public String getNaam(){
+        return getFamilienaam()+" "+getVoornaam();
+    }
     
+    
+    public void CheckLogin(String Login, String Pass){
+        
+        
+        
+        
+        
+        
+        Persoon P = null;
+        PreparedStatement statement = null;
+        ResultSet set = null;
+        
+    
+        
+        
+        
+    }
     
     
 }

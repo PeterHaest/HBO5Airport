@@ -5,6 +5,7 @@
  */
 package hbo5.it.www.beans;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -14,11 +15,56 @@ import java.util.Date;
 public class Vlucht {
     private int id;
     private String code;
-    private Date vertrektijd;
-    private Date aankomsttijd;
+    private Timestamp vertrektijd;
+    private Timestamp aankomsttijd;
     private int vliegtuig_id;
     private int vertrekluchthaven_id;
     private int aankomstluchthaven_id;
+    private Luchtvaartmaatschappij luchtvaarmaatschappij;
+    private Luchthaven aankomstluchthaven;
+    private Luchthaven vertrekluchthaven;
+    private Vliegtuig vliegtuig;
+    private Vliegtuigtype vliegtype;
+
+    public Luchtvaartmaatschappij getLuchtvaarmaatschappij() {
+        return luchtvaarmaatschappij;
+    }
+
+    public void setLuchtvaarmaatschappij(Luchtvaartmaatschappij luchtvaarmaatschappij) {
+        this.luchtvaarmaatschappij = luchtvaarmaatschappij;
+    }
+
+    public Luchthaven getAankomstluchthaven() {
+        return aankomstluchthaven;
+    }
+
+    public void setAankomstluchthaven(Luchthaven aankomstluchthaven) {
+        this.aankomstluchthaven = aankomstluchthaven;
+    }
+
+    public Luchthaven getVertrekluchthaven() {
+        return vertrekluchthaven;
+    }
+
+    public void setVertrekluchthaven(Luchthaven vertrekluchthaven) {
+        this.vertrekluchthaven = vertrekluchthaven;
+    }
+
+    public Vliegtuig getVliegtuig() {
+        return vliegtuig;
+    }
+
+    public void setVliegtuig(Vliegtuig vliegtuig) {
+        this.vliegtuig = vliegtuig;
+    }
+
+    public Vliegtuigtype getVliegtype() {
+        return vliegtype;
+    }
+
+    public void setVliegtype(Vliegtuigtype vliegtype) {
+        this.vliegtype = vliegtype;
+    }
 
     public int getId() {
         return id;
@@ -40,7 +86,7 @@ public class Vlucht {
         return vertrektijd;
     }
 
-    public void setVertrektijd(Date vertrektijd) {
+    public void setVertrektijd(Timestamp vertrektijd) {
         this.vertrektijd = vertrektijd;
     }
 
@@ -48,7 +94,7 @@ public class Vlucht {
         return aankomsttijd;
     }
 
-    public void setAankomsttijd(Date aankomsttijd) {
+    public void setAankomsttijd(Timestamp aankomsttijd) {
         this.aankomsttijd = aankomsttijd;
     }
 
