@@ -7,6 +7,7 @@ package hbo5.it.www;
 
 
 
+
 import hbo5.it.www.beans.Bemanningslid;
 
 import hbo5.it.www.beans.Crew;
@@ -15,7 +16,9 @@ import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Passagier;
 import hbo5.it.www.beans.Persoon;
 import hbo5.it.www.beans.Vlucht;
+
 import hbo5.it.www.dataaccess.DABemanningslid;
+
 import hbo5.it.www.dataaccess.DAHangar;
 import hbo5.it.www.dataaccess.DALeasemaatschappij;
 import hbo5.it.www.dataaccess.DALuchthaven;
@@ -29,6 +32,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.sql.SQLException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +44,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.GenericServlet;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,6 +77,7 @@ public class AdminServlet extends HttpServlet {
         private DAVliegtuigtype datype = null;
 
         private DABemanningslid dabemanning = null;
+
 
         
         
@@ -116,6 +122,7 @@ public class AdminServlet extends HttpServlet {
                 dabemanning = new DABemanningslid(url, login, password, driver);
             }
 
+
         }catch (ClassNotFoundException | SQLException e) {
             throw new ServletException(e);
         }
@@ -151,6 +158,7 @@ public class AdminServlet extends HttpServlet {
             if (datype != null) {
                 datype.close();
             }
+
 
             if(dabemanning != null){
                 dabemanning.close();
@@ -199,13 +207,16 @@ public class AdminServlet extends HttpServlet {
               session.setAttribute("lijstmaatschappijen",damaatschappij.get_luchtvaartmaatschapijen());
               session.setAttribute("lijstpersonen", dapersoon.get_names());
 
+
               session.setAttribute("lijstLease",dalease.get_leaseNamen());
+
 
             
    
         if (request.getParameter("btnWijzig")!= null) {
                 url="LoginPage.jsp";
             }
+
 
             else if (request.getParameter("btnVerwijder") != null) {
                 
@@ -533,12 +544,15 @@ public class AdminServlet extends HttpServlet {
             url="overzichtHangars.jsp";
         }
 
+
         else if ("Luchthaven".equals(request.getParameter("choice"))){
+
 
         session.setAttribute("VarLuchthaven", request.getParameter("LstHaven"));
         request.setAttribute("Luchthaven", daLuchthaven.getLuchthaven((String)session.getAttribute("VarLuchthaven")));
         url = "overzichtLuchthavens.jsp";
         }
+
 
         else if ("luchtvaartmaatschappij".equals(request.getParameter("choice"))){
 

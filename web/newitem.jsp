@@ -6,6 +6,7 @@
 --%>
 
 
+
 <%@page import="java.util.AbstractList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Collection"%>
@@ -17,6 +18,7 @@
 
 <%@page import="oracle.sql.Datum"%>
 <%@page import="java.time.Instant"%>
+
 <%@page import="hbo5.it.www.beans.Luchtvaartmaatschappij"%>
 <%@page import="hbo5.it.www.beans.Vliegtuigtype"%>
 <%@page import="hbo5.it.www.beans.Vliegtuig"%>
@@ -79,15 +81,18 @@
                                 </div>
                                 <form action="AdminServlet?choice=submit" method="get" >
 
+
                                    <div class="container">
      <table class="table table-responsive table-striped ">
          <thead class="thead-inverse">
              <tr>
 
+
                                     <th>id</th>
                                     <th>naam</th>
                                     <%if ("lease".equals(request.getParameter("kind"))) {%>
                                     <%session.setAttribute("newItem", "Lease");%>
+
 
              </tr>
          </thead>
@@ -104,6 +109,7 @@
                                     <% if ("Luchthaven".equals(request.getParameter("kind"))){ 
                                         session.setAttribute("newItem", "Luchthaven");
 
+
                                     %>
                                             
                                             <th>stad</th>
@@ -115,8 +121,10 @@
                                        <%}%>     
                                             
 
+
                                        <%if ("luchtvaartmaatschappij".equals(request.getParameter("kind"))) {
                                            session.setAttribute("newItem", "luchtvaartmaatschappij");%>
+
 
 <tr>
                                             <td><input type="text" name="txtid" readonly="true" value="<%=request.getAttribute("topId")%>"/> </td>
@@ -139,9 +147,10 @@
                                                 </select>
                                             </td> 
                                             <td>
-                                                <select name="LstLease">
+
 
                                                     <option value="null"> niet in lease</option>
+
 
                                                     <% ArrayList<Leasemaatschappij> lijst = (ArrayList<Leasemaatschappij>) session.getAttribute("maatschappijen");
                                                     for (Leasemaatschappij item : lijst) {%>
@@ -159,6 +168,7 @@
                                             </td>
                                     </tr>
 <%}%>
+
 <%if("vlucht".equals(request.getParameter("kind"))){%>
      <%session.setAttribute("newItem", "vlucht");%>
 
@@ -258,6 +268,7 @@
                                         </div>   
                                                                         </form>
  </div>   
+
 
 
        <footer>

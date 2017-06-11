@@ -15,7 +15,15 @@ body{
         background-attachment: fixed;
         background-size:100% 105%;
         background-position: 50% ;
+           position: relative;
+           
+        
 }
+   form
+           {
+               width: 300px;
+              margin-left: 350px;
+           }
 
 /*Owl Carousel*/
 .owl-prev, .owl-next
@@ -92,6 +100,11 @@ p:hover{
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
+    text-align: center;
+}
+.form-group
+{
+    position: relative;
 }
 /*=================================================
 ||				3. Header
@@ -643,7 +656,6 @@ footer a:hover, footer a:focus{
 }
 
 
-
 /*=================================================
 ||				15. Footer
 ==================================================*/
@@ -690,6 +702,7 @@ body {
   text-align: center;
 }
 
+
 .select {
     width: 20%;
     margin: 15px;
@@ -698,3 +711,4 @@ body {
 .date {
     display: none;
 }
+

@@ -94,7 +94,9 @@
                                     <% if(session.getAttribute("ChosenHaven") != null) {
                                         Luchthaven LH = (Luchthaven) session.getAttribute("ChosenHaven");
 
+
                                         session.setAttribute("newItem", "Luchthaven"); %>
+
 
 <table>
                                     <th>id</th>
@@ -144,7 +146,7 @@
                                                     <%}%>
                                                 </select>
                                             </td>
-                                         
+
                                     </tr>
 <%}%>
 

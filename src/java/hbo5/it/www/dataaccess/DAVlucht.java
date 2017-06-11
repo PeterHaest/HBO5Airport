@@ -19,10 +19,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
 import java.time.Instant;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -30,7 +32,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import oracle.sql.DATE;
+
 
 
 
@@ -51,6 +55,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
     public ArrayList<String> Vlucht_ids(){
         ArrayList<String> Lijst = new ArrayList<>();
 
+       
         
         try {
             statement = connection.prepareStatement("select code from vlucht");
@@ -338,7 +343,9 @@ public DAVlucht (String url, String login, String password, String driver)   thr
     public Vlucht ZoekDetails(int id){
               
         Vlucht V = null;
-  
+
+
+
         
          try {
                 statement = connection.prepareStatement("select * from vlucht inner join luchthaven on vlucht.vertrekLuchthaven_id = luchthaven.ID inner join luchthaven lh2 on vlucht.aankomstluchthaven_id = lh2.ID inner join vliegtuig on vlucht.VLIEGTUIG_ID = vliegtuig.ID inner join vliegtuigtype on vliegtuig.VLIEGTUIGTYPE_ID = vliegtuigtype.ID inner join luchtvaartmaatschappij on vliegtuig.LUCHTVAARTMAATSCHAPPIJ_ID = luchtvaartmaatschappij.ID where vlucht.id = ?");
@@ -383,7 +390,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
     
     
     public ArrayList<Crew> Crew_per_vlucht(String code){
-       
+
         
         ArrayList<Crew> Lijst = new ArrayList<>();
         try {
@@ -412,8 +419,10 @@ public DAVlucht (String url, String login, String password, String driver)   thr
         }
         return Lijst;
     }
+
        PreparedStatement statement = null;
         ResultSet set = null;
+
  public ArrayList<Vlucht> Vluchten(){
          
         ArrayList<Vlucht> Lijst = new ArrayList<>();
@@ -464,7 +473,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
         }
         return out;
         
-    }
+     }
      
      public Map<Integer,ArrayList<String>> vluchtenperpersoon(Integer id){
 
@@ -515,6 +524,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          
      }
      
+
 }
  
 

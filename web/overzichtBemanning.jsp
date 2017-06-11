@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : overzichtBemmanning
     Created on : 23-mei-2017, 14:19:49
@@ -118,7 +119,8 @@
                                 </div>   
      <%}%>                               
                                                
-       
+         </body>
+       <%session.setAttribute("currentPage", "overzichtBemanning.jsp");%>
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
            
@@ -129,8 +131,8 @@
 
 
 
-    <%session.setAttribute("currentPage", "overzichtBemanning.jsp");%>
+
+   
 
 
-    </body>
-</html>
+  

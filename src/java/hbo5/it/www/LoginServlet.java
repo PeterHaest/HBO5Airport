@@ -108,12 +108,14 @@ public class LoginServlet extends HttpServlet {
                          rd = request.getRequestDispatcher("StartDirector.jsp");
                          rd.forward(request, response);
                     }
+
                     session.setAttribute("Crew",dapersoon.CheckIfCrew(Persoon) );
                             
                url = "index.jsp";
                 }
                 else {
                  url = "LoginPage.jsp";
+
                 }
            
       rd = request.getRequestDispatcher(url);

@@ -1,3 +1,4 @@
+
 <html>
     <head>
 		<!-- meta -->
@@ -42,6 +43,7 @@
                                 else{
                                     url = "index.jsp";}%>
 
+
                                     <a class="navbar-brand" href="<%=url%>" title="HOME"><i class="ion-paper-airplane"></i> Java <span>travel</span></a>
 			</div> <!-- /.navbar-header -->
 
@@ -81,7 +83,7 @@
 <%}%>
           
       
-        
+
        
        <footer>
            <div class="container">

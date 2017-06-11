@@ -1,3 +1,4 @@
+
 <%-- 
     HBO5 Programeren 4
     Document   : overzichtHangars
@@ -136,6 +137,7 @@
 
 
     <%session.setAttribute("currentPage", "overzichtHangars.jsp");%>
+
 
     </footer>
 

@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : overzichtLuchthavens
     Created on : 23-mei-2017, 14:19:49
@@ -66,6 +67,7 @@
 	  	</div>
 	</nav>
 
+
  
   
                                 </div>
@@ -131,6 +133,7 @@
                                 </div>
        </div>
 
+
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
            
@@ -144,4 +147,3 @@
     <%session.setAttribute("currentPage", "overzichtLuchthavens.jsp");%>
 
     </body>
-</html>
