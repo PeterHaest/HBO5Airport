@@ -28,8 +28,10 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpSession;
@@ -255,38 +257,46 @@ public class ZoekServlet extends HttpServlet {
             if  ("vluchtnummer".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 String optie = "met " + request.getParameter("optie");
+                String returnoptie = request.getParameter("optie");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpCode(input);
                 request.setAttribute("vluchten", vluchten);
                 request.setAttribute("input", input);
                 request.setAttribute("optie", optie);
+                request.setAttribute("returnoptie", returnoptie);
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
             else if ("datum".equals(request.getParameter("optie"))){
                 String input = request.getParameter("date") + " 00:00:00";
                 String optie = "vanaf " + request.getParameter("optie");
+                String returnoptie = request.getParameter("optie");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpDatum(input);
                 request.setAttribute("vluchten", vluchten);
                 String date  = request.getParameter("date");
                 request.setAttribute("input", date);
                 request.setAttribute("optie", optie);
+                request.setAttribute("returnoptie", returnoptie);
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
             else if ("bestemming".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 String optie ="met " + request.getParameter("optie");
+                String returnoptie = request.getParameter("optie");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpBestemming(input);
                 request.setAttribute("vluchten", vluchten);
                 request.setAttribute("input", input);
                 request.setAttribute("optie", optie);
+                request.setAttribute("returnoptie", returnoptie);
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
             else if ("luchtvaartmaatschappij".equals(request.getParameter("optie"))){
                 String input = request.getParameter("input");
                 String optie = "met " + request.getParameter("optie");
+                String returnoptie = request.getParameter("optie");
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpLuchtvaartmaatschappij(input);
                 request.setAttribute("vluchten", vluchten);
                 request.setAttribute("input", input);
                 request.setAttribute("optie", optie);
+                request.setAttribute("returnoptie", returnoptie);
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
         }
@@ -294,7 +304,13 @@ public class ZoekServlet extends HttpServlet {
         else if (session.getAttribute("Search") == "details"){
             Vlucht v = davlucht.ZoekDetails(Integer.parseInt(request.getParameter("id")));
             ArrayList<Passagier> passagiers = dapassagier.Passagiers_per_vlucht(Integer.parseInt(request.getParameter("id")));
+            String optie = request.getParameter("optie");
+            String input = request.getParameter("input");
+            String hide = request.getParameter("hide");
             request.setAttribute("vlucht", v);
+            request.setAttribute("optie", optie);
+            request.setAttribute("input", input);
+            request.setAttribute("hide", hide);
             request.setAttribute("passagiers", passagiers);
             request.getRequestDispatcher("details.jsp").forward(request, response);
         }
@@ -363,10 +379,25 @@ public class ZoekServlet extends HttpServlet {
                     LocalDate today = LocalDate.now();
                     for (Passagier p : passagiers) {
                         Date birthday = p.getPersoon().getGeboortedatum();
-                        totaleleeftijd += (Integer)today.getYear();
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(birthday);
+                        int year = cal.get(Calendar.YEAR);
+                        totaleleeftijd += today.getYear() - year;
                         teller++;
                     }
+                    if (passagiers.isEmpty()){
+                        totaleleeftijd = 0;
+                    }
+                    else {
                     totaleleeftijd = totaleleeftijd/teller;
+                    }
+                    Luchthaven l = daluchthaven.getLuchthaven("1");
+                    Luchthaven l2 = daluchthaven.getLuchthaven(request.getParameter("Gemiddelde"));
+                    String optie2 = " met bestemming "+ l2.getNaam();
+                    String optie = " bij vluchten met aankomstluchthaven " + l.getNaam();
+                    request.setAttribute("passagiers", passagiers);
+                    request.setAttribute("optie", optie);
+                    request.setAttribute("optie2", optie2);
                     request.setAttribute("totaleleeftijd", totaleleeftijd);
             }
             request.getRequestDispatcher("Statistieken.jsp").forward(request, response);

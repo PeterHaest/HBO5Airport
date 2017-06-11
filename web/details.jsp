@@ -29,6 +29,7 @@
     <body>
         <%ArrayList<Passagier> resultaat = 
         (ArrayList<Passagier>) request.getAttribute("passagiers");%>
+        <%String hide = (String)request.getAttribute("hide");%> 
         <div>
         <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -75,6 +76,13 @@
         <section class="tour section-wrapper col-md-offset-2">
             <!--for demo wrap-->
             <h1 class="tour section-wrapper container">Details voor vlucht met vluchtnummer ${vlucht.code}:</h1>
+            <% if (hide.equals("no")) {%>
+                <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 15px" href="ZoekServlet?Zoeken=Zoeken&optie=${optie}&input=${input}">Return</a>
+            <%}%>
+            <% if (hide.equals("yes")) {%>
+                <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 10px" href="ZoekServlet?Zoeken=inkomend">Return naar inkomende vluchten</a>
+                <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 10px" href="ZoekServlet?Zoeken=uitgaand">Return naar uitgaande vluchten</a>
+            <%}%>
             <h2>Vlucht</h2>
             <p><b>Vluchtnummer:</b> ${vlucht.code}</p>
             <p><b>Aankomstluchthaven:</b> ${vlucht.aankomstluchthaven.naam}</p>

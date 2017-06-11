@@ -124,7 +124,7 @@
                         <input type="submit" name="Search" value="Dag">
             </form>   
                         
-            <h3> Gemiddelde Leeftijd Passagiers per bestemming: ${totaleleeftijd}</h3>
+            <h3> Gemiddelde Leeftijd Passagiers per bestemming ${optie2}: ${totaleleeftijd}</h3>
             <form action="ZoekServlet">
                     <label for="Luchthaven">Bestemming kiezen.</label>
                         <select class="form-control select" name="Gemiddelde">
