@@ -25,6 +25,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpSession;
@@ -310,10 +311,17 @@ public class ZoekServlet extends HttpServlet {
                     LocalDate today = LocalDate.now();
                     for (Passagier p : passagiers) {
                         Date birthday = p.getPersoon().getGeboortedatum();
-                        totaleleeftijd += (Integer)today.getYear();
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(birthday);
+                        int year = cal.get(Calendar.YEAR);
+                        totaleleeftijd += today.getYear() - year;
                         teller++;
                     }
                     totaleleeftijd = totaleleeftijd/teller;
+                    Luchthaven l = daluchthaven.getLuchthaven("1");
+                    String optie = " bij vluchten met aankomstluchthaven " + l.getNaam();
+                    request.setAttribute("passagiers", passagiers);
+                    request.setAttribute("optie", optie);
                     request.setAttribute("totaleleeftijd", totaleleeftijd);
             }
             request.getRequestDispatcher("Statistieken.jsp").forward(request, response);
