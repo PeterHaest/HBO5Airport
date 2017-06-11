@@ -103,7 +103,7 @@
 		for (Vlucht vlucht: resultaat){%>
                 <form action="">
                 <tr>
-                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>"><%=vlucht.getCode()%></a></td>
+                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>&hide=yes"><%=vlucht.getCode()%></a></td>
                     <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
                     <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
                     <td><%=vlucht.getAankomsttijd() %></td>

@@ -252,9 +252,11 @@ public class ZoekServlet extends HttpServlet {
             ArrayList<Passagier> passagiers = dapassagier.Passagiers_per_vlucht(Integer.parseInt(request.getParameter("id")));
             String optie = request.getParameter("optie");
             String input = request.getParameter("input");
+            String hide = request.getParameter("hide");
             request.setAttribute("vlucht", v);
             request.setAttribute("optie", optie);
             request.setAttribute("input", input);
+            request.setAttribute("hide", hide);
             request.setAttribute("passagiers", passagiers);
             request.getRequestDispatcher("details.jsp").forward(request, response);
         }
