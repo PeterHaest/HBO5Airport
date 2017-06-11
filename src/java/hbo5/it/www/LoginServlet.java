@@ -80,6 +80,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
       session = request.getSession();
       session.invalidate();
+       session = request.getSession();
       String url = "";
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("login") != null){
@@ -113,7 +114,7 @@ public class LoginServlet extends HttpServlet {
 
                     session.setAttribute("Crew",dapersoon.CheckIfCrew(Persoon) );
                       
-                    if (session.getAttribute("Crew").equals("1") ) {
+                    if ((Integer)session.getAttribute("Crew") == 1 ) {
                         url = "StartPageBemanningslid.jsp";
                     }
                     else{
