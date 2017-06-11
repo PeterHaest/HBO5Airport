@@ -234,8 +234,10 @@ public class ZoekServlet extends HttpServlet {
 
             request.getRequestDispatcher("ZoekServlet?choice=huidigeVluchten&Zoeken=fuck").forward(request, response);
         }
-        
+        else if (session.getAttribute("Search") == "Booking") {
+        }
         else if (session.getAttribute("Search") == "uitgaand") {
+                
             if (request.getParameter("Luchthaven") != null){
                 String luchthavenid = request.getParameter("Luchthaven");
                 ArrayList<Vlucht> vluchten = davlucht.UitgaandeVluchten(Integer.parseInt(luchthavenid));
