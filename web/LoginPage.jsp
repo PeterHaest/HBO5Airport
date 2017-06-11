@@ -80,6 +80,7 @@
        </div> 
 
                    <% request.setAttribute("Login", session.getAttribute("username")); %>
+                   <%if (session.getAttribute("id") == null) {%>
 <form action="LoginServlet" method="get">
         <div class="container">
              
@@ -108,7 +109,15 @@
                
         </div>
           </form>             
-                                
+          <%}%>
+          <%if (session.getAttribute("id") != null) {%>
+          <form action="LoginServlet" method="get">
+          <div class=" container">
+              <input type="submit" name="Loguit" value="Loguit"/>
+              
+          </div>
+              </form>
+<%}%>
                                 
                                 
                                 

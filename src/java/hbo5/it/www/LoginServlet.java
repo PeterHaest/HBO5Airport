@@ -130,7 +130,11 @@ public class LoginServlet extends HttpServlet {
                     rd.forward(request, response);
 }
            
-            
+            else if(request.getParameter("Loguit")!= null){
+                session.invalidate();
+                 rd = request.getRequestDispatcher("index.jsp");
+             rd.forward(request, response);
+            }
        else if (request.getParameter("registreer")!= null){
            int id;
                 if (session.getAttribute("id") == null) {
