@@ -295,9 +295,6 @@ public class AdminServlet extends HttpServlet {
              else if ("update".equals(request.getParameter("choice"))) {
 
                  if (session.getAttribute("txtid") != null) {
-
-                
-            
                  session.setAttribute("maatschappijen", dalease.get_Leasemaatschappij());
                   session.setAttribute("lijstmaatschappijen",damaatschappij.get_luchtvaartmaatschapijen());
                   if ("lease".equals(request.getParameter("kind"))) {

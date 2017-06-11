@@ -100,12 +100,14 @@
     <%Set set = inhoud.entrySet();%>
  <% Iterator iterator = set.iterator();%>
  <div class="form-group col-md-offset-2">
-    <table>
+     <table class="table">
+         <thead>
         <th>id</th>
         <th>Type</th>
         <th>Reden</th>
         <th>van</th>
         <th>tot</th>
+        </thead>
         <% while (iterator.hasNext()){%>
             <tr>
 
@@ -119,8 +121,6 @@
 
                     <td><%=item%></td>
                 <%}%>
-                    <td>wijzig</td>
-                    <td> verwijder</td>
             </tr>
         <%}%>
     </table>

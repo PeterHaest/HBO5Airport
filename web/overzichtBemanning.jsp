@@ -78,10 +78,10 @@
   
                                 </div>
                                 <form  action="AdminServlet?choice=BemVlucht" method="Post">
-                                <div class="form-group col-md-offset-2"> 
+                                <div class="container"> 
                                     <h1 class="tour section-wrapper container section-title">Overzicht van vluchtbemanning per vlucht.</h1>
                                     <label for="LstVluchten">kies een vlucht</label>
-                                    <select onchange="this.form.submit()" class="form-control select" name="LstVluchten">
+                                    <select onchange="this.form.submit()" class="form-control " name="LstVluchten">
                                         <option selected="true"></option>
                                          <%ArrayList<String> lijst =(ArrayList<String>) session.getAttribute("lijstvluchten");%>
                                             <%for (String item : lijst) {%>
@@ -96,12 +96,12 @@
                                     </form>
                                       <%if (request.getAttribute("Bemanning") != null) {%>
                                            <%ArrayList<Crew> crewlijst = (ArrayList<Crew>) request.getAttribute("Bemanning");%>
-                                    <form >
+                                   
                                         
-                                        <h3> overzicht van vlucht <%=crewlijst.get(1).getCode()%>
-                                        
-                                            <table title="Crew">
-                                                <caption>Crew</caption>
+                                     
+                                         <form >
+                                            <table  class="table">
+                                                <caption class="text-info">overzicht van vlucht <%=crewlijst.get(1).getCode()%></caption>
                                                 <th>functie</th>
                                                 <th>naam</th>
                                         <%for (Crew item : crewlijst){%>

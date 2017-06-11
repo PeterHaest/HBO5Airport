@@ -72,49 +72,45 @@
                                 </div>
 
 
-
+    <h1 class="tour section-wrapper container section-title">overzicht van alle luchtvaartmaatschappijen</h1>
+    <div class="container ">
                                 <form  action="AdminServlet?choice=luchtvaartmaatschappij" method="POST">
-
-                                <div class="form-group"> 
-
-                                    <h1 class=""></h1>
-                                <div class="form-group ">
-                                    <h1 class="tour section-wrapper container section-title">overzicht van alle luchtvaartmaatschappijen</h1>
-
                                     <label for="LstMaatschappij">kies een maatschappij</label>
-                                    <select onchange="this.form.submit()" class="form-control select" name="LstMaatschappij">
+                                    <select onchange="this.form.submit()" class="form-control" name="LstMaatschappij">
                                         <option selected="true"></option>
                                          <%ArrayList<Luchtvaartmaatschappij> lijst =(ArrayList<Luchtvaartmaatschappij>) session.getAttribute("lijstmaatschappijen");%>
                                             <%for (Luchtvaartmaatschappij item : lijst) {%>
                                             <option value="<%=item.getNaam()%>" ><%=item.getNaam()%></option>
                                            <%}%>
                                     </select>
-                                           
-                                </div>           
                                            <%if (request.getAttribute("Maatschappij") != null) {%>
-   
-
+                                           
                                     </form>
                                            <%Luchtvaartmaatschappij L = (Luchtvaartmaatschappij) request.getAttribute("Maatschappij");%>
+                                            <%session.setAttribute("txtid", L.getId());%>
                                            <form action="AdminServlet" >
                                         <div>
-                                            <label for="txtId">id</label>
-                                            <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
+                                            <table class="table tour">
+                                                <tr>
+                                                    <th>   <label for="txtId">id</label></th> 
+                                                    <td>  <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/></td>
+</tr>
 
+                                           
 
-                                            <%session.setAttribute("txtid", L.getId());%>
-
-
-                                            <label for="txtNaam">Naam</label>
-                                            <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
+                                            <tr>
+                                                <th> <label for="txtNaam">Naam</label></th>
+                                                <td> <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/></td>
+                                            </tr>
+                                            </table>
                                          <%}%> 
-                                        </div>
+                                 
 
-
-                                            <td><a href=AdminServlet?choice=add&kind=luchtvaartmaatschappij>Nieuwe Luchthavenmaatschappij</a></td>
-                                            <td><a href=AdminServlet?choice=update&kind=luchtvaartmaatschappij>Gegevens wijzigen</td>
-                                            <td><a href=AdminServlet?choice=delete&kind=luchtvaartmaatschappij>wissen</td>
-
+<div class="container ">
+                                            <td><button class="btn-default"><a href=AdminServlet?choice=add&kind=luchtvaartmaatschappij>Nieuwe Luchthavenmaatschappij</a></button></td>
+                                            <td><button class="btn-default"><a href=AdminServlet?choice=update&kind=luchtvaartmaatschappij>Gegevens wijzigen</a></button></td>
+                                            <td><button class="btn-default"><a href=AdminServlet?choice=delete&kind=luchtvaartmaatschappij>wissen</a></button></td>
+       </div>
 
                                     </form>
                                   
@@ -129,7 +125,7 @@
                                     
                                     
                                     
-                                </div>
+                                </div>  </div>
        
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>

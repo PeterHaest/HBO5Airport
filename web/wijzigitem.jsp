@@ -98,7 +98,7 @@
                                         session.setAttribute("newItem", "Luchthaven"); %>
 
 
-<table>
+                                        <table class="table">
                                     <th>id</th>
                                     <th>naam</th>
                                     
@@ -150,13 +150,13 @@
                                     </tr>
 <%}%>
 
+<tr><input type="submit" name="update" value="wijzig"></tr>
 
 
 
 
 
-
-                                    <input type="submit" name="update">
+                                    
                                 </table>
                                                                         </form>
 

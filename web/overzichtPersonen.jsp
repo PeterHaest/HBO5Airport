@@ -71,10 +71,11 @@
   
                                 </div>
                                 <form  action="AdminServlet?choice=Persoon" method="POST">
-                                <div class="form-group">
                                     <h1 class="tour section-wrapper container section-title">Overzicht van alle personen.</h1>
+                                <div class="container">
+                                    
                                     <label for="LstPersonen">kies een persoon</label>
-                                    <select onchange="this.form.submit()" class="form-control select" name="LstPersonen">
+                                    <select onchange="this.form.submit()" class="form-control" name="LstPersonen">
                                         <option selected="true"></option>
                                          <%ArrayList<String> lijst =(ArrayList<String>) session.getAttribute("lijstpersonen");%>
                                             <%for (String item : lijst) {%>
@@ -82,7 +83,7 @@
                                            <%}%>
                                     </select>
                                            
-                                </div>           
+                                  
                                            <%if (request.getAttribute("Persoon") != null) {%>
    
 
@@ -93,31 +94,58 @@
 session.setAttribute("ChosenPerson", request.getAttribute("Persoon")); %>
 
                                     <form >
-                                        <div>
-                                            <label for="txtId">id</label>
-                                            <input name="txtId" type="text" readonly="true" value="<%=P.getId()%>"/>
-                                             <label for="txtVoornaam">Voornaam</label>
-                                            <input name="txtVoornaam" type="text" value="<%=P.getVoornaam()%>"/>
-                                            <label for="txtNaam">Naam</label>
-                                            <input name="txtNaam" type="text" value="<%=P.getFamilienaam()%>"/>
-                                            <label for="txtStraat">Straat</label>
-                                            <input name="txtStraat" type="text" value="<%=P.getStraat()%>"/>
-                                            <label for="txtHuisnr">huisnummer</label>
-                                            <input name="txtHuisnr" type="text" value="<%=P.getHuisnr()%>"/>
-                                             <label for="txtPostcode">postcode</label>
-                                            <input name="txtPostcode" type="text" readonly="true" value="<%=P.getPostcode()%>"/>
-                                             <label for="txtWoonplaats">woonplaats</label>
-                                            <input name="txtWoonplaats" type="text" readonly="true" value="<%=P.getWoonplaats()%>"/>
-                                             <label for="txtLand">land</label>
-                                            <input name="txtLand" type="text" readonly="true" value="<%=P.getLand()%>"/>
-                                            <label for="txtdatum">geboortedatum</label>
-                                            <input name="txtdatum" type="date" value="<%=P.getGeboortedatum()%>"/>
-                                             <label for="txtUser">Username</label>
-                                            <input name="txtUser" type="text" readonly="true" value="<%=P.getLogin()%>"/>
-                                             <label for="txtPas">Paswoord</label>
-                                             <input name="txtPas" type="password" readonly="true" value="<%=P.getId()%>"/>
-                                            <input type="submit" name="btnWijzig" value="Wijzig"/>
-                                            <input type="submit" name="btnVerwijder" value="Verwijder"/>
+                                 
+                                            <table class="table">
+                                                <tr>
+                                                    <th>   <label for="txtId">id</label></th>
+                                                    <td>     <input name="txtId" type="text" readonly="true" value="<%=P.getId()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                           <th>   <label for="txtVoornaam">Voornaam</label></th>  
+                                          <td>   <input name="txtVoornaam" type="text" value="<%=P.getVoornaam()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                         <th>    <label for="txtNaam">Naam</label></th>  
+                                           <td>  <input name="txtNaam" type="text" value="<%=P.getFamilienaam()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                       <th>      <label for="txtStraat">Straat</label></th>  
+                                          <td>   <input name="txtStraat" type="text" value="<%=P.getStraat()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                        <th>     <label for="txtHuisnr">huisnummer</label></th>  
+                                        <td>    <input name="txtHuisnr" type="text" value="<%=P.getHuisnr()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                         <th>     <label for="txtPostcode">postcode</label></th>  
+                                          <td>   <input name="txtPostcode" type="text" readonly="true" value="<%=P.getPostcode()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                        <th>      <label for="txtWoonplaats">woonplaats</label></th>  
+                                           <td>  <input name="txtWoonplaats" type="text" readonly="true" value="<%=P.getWoonplaats()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                       <th>       <label for="txtLand">land</label></th>  
+                                         <td>    <input name="txtLand" type="text" readonly="true" value="<%=P.getLand()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                      <th>       <label for="txtdatum">geboortedatum</label></th>  
+                                         <td>    <input name="txtdatum" type="date" value="<%=P.getGeboortedatum()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                       <th>       <label for="txtUser">Username</label></th>  
+                                          <td>   <input name="txtUser" type="text" readonly="true" value="<%=P.getLogin()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th>   <label for="txtPas">Paswoord</label></th>  
+                                                <td>       <input name="txtPas" type="password" readonly="true" value="<%=P.getId()%>"/></td>
+                                             </tr>
+                                             <tr>
+                                                 <td>  <input type="submit" name="btnWijzig" value="Wijzig"/></td>  
+                                                 <td> <input type="submit" name="btnVerwijder" value="Verwijder"/></td> 
+                                            </tr>
+                                            </table>
+                                            
                                         </div>
                                     </form>
      <%}%>                               

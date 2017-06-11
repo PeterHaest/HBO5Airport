@@ -110,8 +110,8 @@
      <%Set set = perslijst.entrySet();%>
      <% Iterator iterator = set.iterator();%>
      
-     
-     <table>
+     <div class="container">
+     <table class="table">
          <%while (iterator.hasNext()) {%>
          <%Map.Entry mentry = (Map.Entry) iterator.next();%>
          <tr>    
@@ -122,9 +122,10 @@
 
 <%}%>
      </table>
+     
       <input type="submit" name="btnWijzig" value="Wijzig"/>
                                             <input type="submit" name="btnVerwijder" value="Verwijder"/>
-
+</div>
 <%}%>
                                     
                                     

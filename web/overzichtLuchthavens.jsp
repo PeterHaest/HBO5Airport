@@ -74,10 +74,11 @@
  
   
                                 </div>
-                                <div class="container text-center">
+                                 <h1 class="tour section-wrapper container section-title">overzicht van alle luchthavens</h1>
+                                <div class="container ">
                                 <form  action="AdminServlet?choice=Luchthaven" method="POST">
-                                    <div class="mx-auto">
-                                <div class="form-group"> 
+                                  
+                                 
                                     <label for="LstHaven">kies een luchthaven</label>
                                     <select onchange="this.form.submit()" class="form-control" name="LstHaven" style="width: 50%; margin: 15px">
                                         <option selected="true"></option>
@@ -86,8 +87,8 @@
                                             <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
                                            <%}%>
                                     </select>
-                                    </div>       
-                                </div>           
+                                          
+                                           
                                            <%if (request.getAttribute("Luchthaven") != null) {%>
    
 
@@ -98,20 +99,31 @@
                                          <%session = request.getSession();
                                          session.setAttribute("ChosenHaven", L);%>
                                          
-                                         <div class="container-fluid" >
-                                            <label for="txtId" class="">id</label>
-                                            <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
-                                            <label for="txtNaam">Naam</label>
-                                            <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
-                                            <label for="txtStad">Stad</label>
-                                            <input type="text" name="txtStad" value="<%=L.getStad()%>"/>
-                                        </div>
+                                         <div class="" >
+                                             <table class="table tour ">
+                                                 <tr>
+                                                     <th><label for="txtId" class="section-subtitle">id</label></th>
+                                                     <%session.setAttribute("txtid", L.getId());%>
+                                                     <td><input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th><label for="txtNaam" class="section-subtitle">Naam</label></th>
+                                                <td><input name="txtNaam" type="text" value="<%=L.getNaam()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th> <label for="txtStad" class="section-subtitle">Stad</label></th>
+                                                <td><input type="text" name="txtStad" value="<%=L.getStad()%>"/></td>
+                                            </tr>
+                                            </table>
+                                        
                                              <%}%>  
-                                             <div class="mt-10">
-                                             <button><a href=AdminServlet?choice=add&kind=Luchthaven>Nieuwe Luchthaven</a></button>
-                                             <button><a href=AdminServlet?choice=update&kind=Luchthaven>Gegevens wijzigen</a></button>
-                                             <button><a href=AdminServlet?choice=delete&kind=Luchthaven>wissen</a></button>
-                                            </div>
+                                             <div class="container ">
+                                                 <tr>
+                                                     <td>  <button class="btn-default"><a href=AdminServlet?choice=add&kind=Luchthaven>Nieuwe Luchthaven</a></button></td> 
+                                                     <td><button class="btn-default"><a href=AdminServlet?choice=update&kind=Luchthaven>Gegevens wijzigen</a></button></td>
+                                                     <td> <button class="btn-default"><a href=AdminServlet?choice=delete&kind=Luchthaven>wissen</a></button></td>
+                                             </tr>
+                                         </div>
                                     </form>
                                  
                                     
@@ -125,7 +137,7 @@
                                     
                                     
                                     
-                                </div>
+                            
        </div>
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>

@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="css/owl.carousel.css">
 	<link rel="stylesheet" href="css/owl.theme.css">
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css">
+        
         <link rel="stylesheet" href="css/main.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -72,7 +73,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="zoektest.jsp"> Zoeken </a></li>   
-                                    <li><a href="LoginPage.jsp"><i class="ion-person"></i>${status}</a></li>
+                                    <li><a href="LoginPage.jsp"><i class="ion-person"></i></a></li>
 				</ul> <!-- /.nav -->
 		    </div><!-- /.navbar-collapse -->
 	  	</div><!-- /.container -->
@@ -111,12 +112,14 @@
           </form>             
           <%}%>
           <%if (session.getAttribute("id") != null) {%>
-          <form action="LoginServlet" method="get">
-          <div class=" container">
-              <input type="submit" name="Loguit" value="Loguit"/>
+           <div class=" container" >
+               <form action="LoginServlet" method="get" >
+         
+                   <input type="submit" name="Loguit" value="Loguit" class="text-center price-btn btn-lg " />
               
-          </div>
+       
               </form>
+                  </div>
 <%}%>
                                 
                                 
