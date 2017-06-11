@@ -144,10 +144,7 @@ public class ZoekServlet extends HttpServlet {
         session = request.getSession();
                
 
-        if (request.getParameter("choice").equals("huidigeVluchten")) {
-            session.setAttribute("huidigeVluchten", davlucht.vluchtenperpersoon((Integer)session.getAttribute("id")));
-            request.getRequestDispatcher("huidigeVluchten.jsp").forward(request, response);
-        }
+
         
         
         
@@ -161,8 +158,7 @@ public class ZoekServlet extends HttpServlet {
         
         
         
-        
-        else if (null != request.getParameter("Zoeken"))switch (request.getParameter("Zoeken")) {
+       if (null != request.getParameter("Zoeken"))switch (request.getParameter("Zoeken")) {
             case "inkomend":
                 session.setAttribute("Search", "inkomend");
                 break;
@@ -181,6 +177,8 @@ public class ZoekServlet extends HttpServlet {
             default:
                 break;
         }
+        
+     
         
 
         if (session.getAttribute("Search") == "inkomend") {
@@ -337,6 +335,10 @@ public class ZoekServlet extends HttpServlet {
                     request.setAttribute("totaleleeftijd", totaleleeftijd);
             }
             request.getRequestDispatcher("Statistieken.jsp").forward(request, response);
+        }
+                  if (request.getParameter("choice").equals("huidigeVluchten")) {
+            session.setAttribute("huidigeVluchten", davlucht.vluchtenperpersoon((Integer)session.getAttribute("id")));
+            request.getRequestDispatcher("huidigeVluchten.jsp").forward(request, response);
         }
     }
 

@@ -3,71 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/overzichtBemanning.jsp</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/src/java/hbo5/it/www/dataaccess/DAVliegtuig.java</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/css/main.css</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/css/services.css</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/overzichtLuchthavens.jsp</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/newitem.jsp</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/src/java/hbo5/it/www/AdminServlet.java</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/web/css/owl.theme.css</file>
-            <file>file:/F:/Documents/GitHub/HBO5Airport/src/java/hbo5/it/www/dataaccess/DABemanningslid.java</file>
-
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/StartPageBemanningslid.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/index.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/LoginPage.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/StartPagePassagier.jsp</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/beans/Luchtvaartmaatschappij.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/Statistieken.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DALuchtvaartmaatschappij.java</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/zoekresult.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/css/main.css</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/StartDirector.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DAPersoon.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DALuchthaven.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/images/visit-1.png</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/beans/Luchthaven.java</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtLuchthavens.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DAVlucht.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/StartAdmin.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DAStockage.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtPassagiers.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/zoektest.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DAVliegtuig.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/WEB-INF/tags/siteTemplate.tag</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/ZoekServlet.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtBemanning.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/beans/Vlucht.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/images/visit-2.png</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtMaatschappijen.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/newitem.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/RegisterServlet.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/deleteitem.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/wijzigitem.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/LoginServlet.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtvliegtuigen.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/inkomend.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtHangars.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtLease.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/dataaccess/DAPassagier.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/overzichtPersonen.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/images/visit-3.png</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/beans/Persoon.java</file>
-
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/beans/Passagier.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/src/java/hbo5/it/www/AdminServlet.java</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/details.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/uitgaand.jsp</file>
-            <file>file:/C:/Users/Peter/Documents/NetBeansProjects/HBO5Airport-duizendstekeer/web/register.jsp</file>
-
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/src/java/hbo5/it/www/LoginServlet.java</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/src/java/hbo5/it/www/dataaccess/DAVlucht.java</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/Statistieken.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/StartPagePassagier.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/index.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/huidigeVluchten.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/src/java/hbo5/it/www/ZoekServlet.java</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/overzichtVluchten.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/newitem.jsp</file>
+            <file>file:/X:/OneDrive/dag/java/H6%20Servlet%20en%20JSP/HBO5Airport/web/LoginPage.jsp</file>
         </group>
     </open-files>
 </project-private>
