@@ -487,17 +487,17 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          b.append("left join Luchthaven lg on lg.ID = v.AANKOMSTLUCHTHAVEN_ID ");
          b.append("left join VLIEGTUIG vl on v.VLIEGTUIG_ID = vl.ID ");
          b.append("left join vliegtuigtype vt on vt.ID = vl.VLIEGTUIGTYPE_ID ");
-         b.append("left join passagier p on p.VLUCHT_ID = v.id ");
-         b.append("where v.id = ");
+         b.append("where v.id = ?");
          try {
              Integer teller = 1;
-             statement = connection.prepareStatement("select Vlucht_id, id from passagier where persoon_id = ?");
+             statement = connection.prepareStatement("select Vlucht_id from passagier where persoon_id = ?");
              statement.setInt(1, id);
              set = statement.executeQuery();
              while(set.next()){
                  try {
-                     b.append(set.getInt("Vlucht_id"));
+                     
                      statement2 = connection.prepareStatement(b.toString());
+                     statement2.setString(1, set.getString(1));
                      set2 = statement2.executeQuery();
                      
                      while (set2.next()) {
