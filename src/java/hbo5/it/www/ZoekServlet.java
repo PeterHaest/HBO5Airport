@@ -9,11 +9,14 @@ import hbo5.it.www.beans.Luchthaven;
 import hbo5.it.www.beans.Luchtvaartmaatschappij;
 import hbo5.it.www.beans.Passagier;
 import hbo5.it.www.beans.Vlucht;
+import hbo5.it.www.dataaccess.DALeasemaatschappij;
 import hbo5.it.www.dataaccess.DALuchthaven;
 import hbo5.it.www.dataaccess.DAPersoon;
 import hbo5.it.www.dataaccess.DAVlucht;
 import hbo5.it.www.dataaccess.DALuchtvaartmaatschappij;
 import hbo5.it.www.dataaccess.DAPassagier;
+import hbo5.it.www.dataaccess.DAVliegtuig;
+import hbo5.it.www.dataaccess.DAVliegtuigklasse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -25,6 +28,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpSession;
@@ -51,6 +56,9 @@ public class ZoekServlet extends HttpServlet {
     private DALuchthaven daluchthaven = null;
     private DALuchtvaartmaatschappij daluchtvaartmaatschappij = null;
     private DAPassagier dapassagier = null;
+    private DAVliegtuigklasse davliegtuigklasse = null;
+   private DALeasemaatschappij dalease = null;
+   private DAVliegtuig davliegtuig = null;
     @Override
     public void init() throws ServletException {
         try {
@@ -74,6 +82,15 @@ public class ZoekServlet extends HttpServlet {
             if(dapassagier == null){
                 dapassagier = new DAPassagier(url, login, password, driver);
             }
+            if(davliegtuigklasse == null){
+                davliegtuigklasse = new DAVliegtuigklasse(url, login, password, driver);
+            }
+             if (dalease == null) {
+                dalease = new DALeasemaatschappij(url, login, password, driver);
+            }
+                if (davliegtuig == null) {
+                davliegtuig = new DAVliegtuig(url, login, password, driver);
+            }
             
         }catch (ClassNotFoundException | SQLException e) {
             throw new ServletException(e);
@@ -94,6 +111,15 @@ public class ZoekServlet extends HttpServlet {
             }
             if (dapassagier!= null) {
                 dapassagier.close();
+            }
+            if (davliegtuigklasse != null) {
+                davliegtuigklasse.close();
+            }
+              if (dalease != null) {
+                dalease.close();
+            }
+               if (davliegtuig != null) {
+                davliegtuig.close();
             }
         } catch (SQLException e) {
         }
@@ -142,22 +168,6 @@ public class ZoekServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         session = request.getSession();
-               
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
        if (null != request.getParameter("Zoeken"))switch (request.getParameter("Zoeken")) {
             case "inkomend":
                 session.setAttribute("Search", "inkomend");
@@ -174,13 +184,16 @@ public class ZoekServlet extends HttpServlet {
             case "statistieken":
                 session.setAttribute("Search", "statistieken");
                 break;
+            case "Booking":
+                    session.setAttribute("Search", "Booking");
+                    break;
             default:
                 break;
         }
         
      
-        
-
+        Map<String,Object> nMap = new HashMap<>();
+  
         if (session.getAttribute("Search") == "inkomend") {
             if (request.getParameter("Luchthaven") != null){
                 String luchthavenid = request.getParameter("Luchthaven");
@@ -197,6 +210,27 @@ public class ZoekServlet extends HttpServlet {
             }
              // Will be available as ${vluchten} in JSP
             request.getRequestDispatcher("inkomend.jsp").forward(request, response);
+        }
+        else if (session.getAttribute("Search") == "Booking") {
+            nMap.clear();
+                            nMap.put("1",dalease.getTopId("passagier"));
+                            nMap.put("2",1);
+                            nMap.put("3", 0);
+                            nMap.put("4", request.getParameter("LstKlasse"));
+                            nMap.put("5",request.getParameter("txtStoel"));
+                            nMap.put("6",session.getAttribute("gekozenvlucht"));
+                            nMap.put("7",session.getAttribute("id") );
+                            
+                            
+                            davliegtuig.Add_Row(nMap, "Passagier");
+                            
+                            
+                       
+                       
+                       request.setAttribute("toekomst", "0");
+                      session.setAttribute("Search", null);
+                       
+            request.getRequestDispatcher("ZoekServlet?choice=huidigeVluchten").forward(request, response);
         }
         
         else if (session.getAttribute("Search") == "uitgaand") {
@@ -256,6 +290,7 @@ public class ZoekServlet extends HttpServlet {
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
         }
+        
         else if (session.getAttribute("Search") == "details"){
             Vlucht v = davlucht.ZoekDetails(Integer.parseInt(request.getParameter("id")));
             ArrayList<Passagier> passagiers = dapassagier.Passagiers_per_vlucht(Integer.parseInt(request.getParameter("id")));
@@ -337,9 +372,23 @@ public class ZoekServlet extends HttpServlet {
             request.getRequestDispatcher("Statistieken.jsp").forward(request, response);
         }
                   if (request.getParameter("choice").equals("huidigeVluchten")) {
+                  
+                      request.setAttribute("toekomst", "0");
             session.setAttribute("huidigeVluchten", davlucht.vluchtenperpersoon((Integer)session.getAttribute("id")));
+            request.getRequestDispatcher("huidigeVluchten.jsp").forward(request, response);}
+          
+                  else if (request.getParameter("choice").equals("toekomstigeVluchten")) {
+               request.setAttribute("toekomst", "1");
+            session.setAttribute("huidigeVluchten", davlucht.vluchtvanafnu());
             request.getRequestDispatcher("huidigeVluchten.jsp").forward(request, response);
         }
+        
+                  else if (request.getParameter("choice").equals("Book")) {
+            session.setAttribute("gekozenvlucht", request.getParameter("vluchtid"));
+            session.setAttribute("vliegtuigklasses", davliegtuigklasse.getvliegtuigklasse());
+            request.getRequestDispatcher("booking.jsp").forward(request, response);
+        }
+
     }
 
     /**

@@ -19,7 +19,7 @@
                 <ul class="nav">
                     <li class="active">Documenten raadplegen</li>
                     <li class="active"><a href="javascript:;">Reisschema raadplegen</a></li>
-                    <li class="active"><a href="javascript:;">Passagierlijsten raadplegen</a></li>
+                    <li class="active"><a href="AdminServlet?page=passagiers">Passagierlijsten raadplegen</a></li>
                 </ul>
             </nav>
         </div>

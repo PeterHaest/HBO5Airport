@@ -5,9 +5,13 @@
  */
 package hbo5.it.www.dataaccess;
 
+import hbo5.it.www.beans.Vliegtuigklasse;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,6 +29,28 @@ public DAVliegtuigklasse (String url, String login, String password, String driv
         if (connection != null) {
             connection.close();
         }  
+    }
+    PreparedStatement statement;
+    ResultSet set;
+    
+    
+    
+    
+    
+    public ArrayList< Vliegtuigklasse> getvliegtuigklasse(){
+        ArrayList< Vliegtuigklasse> lijst = new ArrayList< Vliegtuigklasse>();
+        try {
+               statement = connection.prepareStatement("select * from vliegtuigklasse");
+        set = statement.executeQuery();
+            while (set.next()) {                
+                Vliegtuigklasse V = new Vliegtuigklasse();
+                V.setId(set.getInt(1));
+                V.setNaam(set.getString(2));
+                lijst.add(V);
+            }
+        } catch (Exception e) {
+        }
+        return lijst;
     }
 
 }

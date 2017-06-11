@@ -516,13 +516,57 @@ public DAVlucht (String url, String login, String password, String driver)   thr
              }
               } catch (Exception e) {
          }  
-         return nMap;
+         return nMap; 
+     }
+ 
+
+     public Map<Integer,ArrayList<String>> vluchtvanafnu(){
+
+         Map<Integer,ArrayList<String>> nMap = new HashMap<>();
+         StringBuilder b = new StringBuilder();
+         b.append("select v.id, v.CODE, vt.NAAM, l.stad,lg.stad, v.VERTREKTIJD, v.AANKOMSTTIJD from vlucht v ");
+         b.append("left join LUCHTHAVEN l on l.ID = v.VERTREKLUCHTHAVEN_ID ");
+         b.append("left join Luchthaven lg on lg.ID = v.AANKOMSTLUCHTHAVEN_ID ");
+         b.append("left join VLIEGTUIG vl on v.VLIEGTUIG_ID = vl.ID ");
+         b.append("left join vliegtuigtype vt on vt.ID = vl.VLIEGTUIGTYPE_ID ");
+         b.append("where v.vertrektijd >= SYSDATE  ");
+         try {
+             Integer teller = 1;
+                     statement = connection.prepareStatement(b.toString());
+                     set = statement.executeQuery();
+                     while (set.next()) {
+                        ArrayList<String> lijst = new ArrayList<>();
+                        lijst.add(set.getString(1));
+                         lijst.add(set.getString(2));
+                         lijst.add(set.getString(3));
+                         lijst.add(set.getString(4));
+                         lijst.add(set.getString(5));
+                         lijst.add(set.getDate(6).toString());
+                         lijst.add(set.getDate(7).toString());
+                         nMap.put(teller, lijst);
+                         teller++;
+                         
+                     }
+                 } catch (Exception e) {
+                 }
              
-             
-             
+          
+         return nMap; 
+     }
+     public void Add_booking(Integer pasId, String vluchtid, Integer persoonid, String klasseid, String seat){
+         
         
          
+         
+         
+         
+         
+         
+         
+         
+         
      }
+     
      
 
 }

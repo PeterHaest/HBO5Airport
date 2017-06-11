@@ -1,17 +1,13 @@
 <%-- 
     HBO5 Programeren 4
-    Document   : huidigeVluchten
-    Created on : 11-jun-2017, 2:36:42
+    Document   : booking
+    Created on : 11-jun-2017, 14:51:04
     Author     : steve
 --%>
 
-<%@page import="java.util.Map"%>
+
+<%@page import="hbo5.it.www.beans.Vliegtuigklasse"%>
 <%@page import="java.util.ArrayList"%>
-<%-- 
-    Document   : siteTemplate
-    Created on : 23-apr-2017, 14:26:18
-    Author     : steve
---%>
 <html>
     <head>
 		<!-- meta -->
@@ -30,7 +26,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         
-
+        
       
 </head>
     <body>
@@ -56,6 +52,7 @@
                                 else{
                                     url = "index.jsp";}%>
 
+
                                     <a class="navbar-brand" href="<%=url%>" title="HOME"><i class="ion-paper-airplane"></i> Java <span>travel</span></a>
 			</div> <!-- /.navbar-header -->
 
@@ -79,52 +76,47 @@
 	  	</div><!-- /.container -->
 	</nav>
        </div> 
-                                    <%Map<Integer,ArrayList<String>> nMap = (Map<Integer,ArrayList<String>>) session.getAttribute("huidigeVluchten");%>
+     
+                                
+                                
+                                    <%ArrayList<Vliegtuigklasse> lijst =(ArrayList<Vliegtuigklasse>) session.getAttribute("vliegtuigklasses");%>
+                                  
+                                
                                     <div class="container">
-                                    <%if (nMap.size() > 0) {%>
-                                 
-                                    <table class="table table-responsive">
-    <thead>
-    <th>vlucht id</th>
-    <th>vlucht Code</th>
-    <th>Vliegtuigtype</th>
-    <th>vertrek</th>
-    <th>bestemming</th>
-    <th>vertrektijd</th>
-    <th>aankomsttijd</th>
-    </thead>
-    <tbody>
- 
-         <%for (Map.Entry<Integer,ArrayList<String>> entry : nMap.entrySet()) {%>
-                                       <%ArrayList<String> list = entry.getValue();%>
-                                       <tr>
-                                           <%String VluchtId = "";%>
-                                           <%Integer teller = 1;%>
-                                           <%for (String elem : list) {%>
-                                           <%if (teller == 1) {
-                                               VluchtId = elem;
-   }%>
-                                           <td><%=elem%></td>
-                                           <%teller++;%>
-                                           <%}%>
-                                           <%if (request.getAttribute("toekomst").equals("1") ) {%>
-                                           <td> <button value="<%=entry.getKey()%>"><a href="ZoekServlet?choice=Book&vluchtid=<%=VluchtId%>">boeken</a></button></td>
+                                        <form action="ZoekServlet?choice=geboekt">
+                                        <table class="table table-responsive">
+                                        <tr>
+                                            <td>vlucht</td>
+                                            <td><%=session.getAttribute("gekozenvlucht")%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>naam</td>
+                                            <td><%=session.getAttribute("naam")%> <%=session.getAttribute("familienaam")%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>klasse</td>
+                                            <td>
+                                        <select name="LstKlasse">
+                                            <%for (Vliegtuigklasse elem : lijst) {%>
+                                            <option value="<%=elem.getId()%>"><%=elem.getNaam()%></option>
 <%}%>
-                                       </tr>
-                                       <%}%>
-    </tbody>
-    
-    
-                                    
-                                </table>
-<%}%>
-<%if (nMap.size() == 0) {%>
-                                      
-                                        <p>testni</p>
-                                        <%}%>
-                                
-                                
-                                        </div>
+                                        </select>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                            <td>voorkeur stoel</td>
+                                            <td> <input type="text" name="txtStoel" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="Zoeken" value="Booking" class="btn-lg ">
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </div>
+</form>
+                       
        
        <footer>
            <div class="container">
