@@ -484,9 +484,10 @@ public DAVlucht (String url, String login, String password, String driver)   thr
          StringBuilder b = new StringBuilder();
          b.append("select v.id, v.CODE, vt.NAAM, l.NAAM,lg.NAAM, v.VERTREKTIJD, v.AANKOMSTTIJD from vlucht v ");
          b.append("left join LUCHTHAVEN l on l.ID = v.VERTREKLUCHTHAVEN_ID ");
-         b.append("left join Luchthaven lg on l.ID = v.AANKOMSTLUCHTHAVEN_ID ");
+         b.append("left join Luchthaven lg on lg.ID = v.AANKOMSTLUCHTHAVEN_ID ");
          b.append("left join VLIEGTUIG vl on v.VLIEGTUIG_ID = vl.ID ");
          b.append("left join vliegtuigtype vt on vt.ID = vl.VLIEGTUIGTYPE_ID ");
+         b.append("left join passagier p on p.VLUCHT_ID = v.id ");
          b.append("where v.id = ");
          try {
              Integer teller = 1;
@@ -501,6 +502,7 @@ public DAVlucht (String url, String login, String password, String driver)   thr
                      
                      while (set2.next()) {
                         ArrayList<String> lijst = new ArrayList<>();
+                        lijst.add(set2.getString(1));
                          lijst.add(set2.getString(2));
                          lijst.add(set2.getString(3));
                          lijst.add(set2.getString(4));

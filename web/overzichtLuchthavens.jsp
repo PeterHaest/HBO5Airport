@@ -100,7 +100,7 @@
                                          session.setAttribute("ChosenHaven", L);%>
                                          
 
-                                         <div class="container-fluid" >
+                                         <div class="container" >
                                             <label for="txtId" class="">id</label>
                                             <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
 

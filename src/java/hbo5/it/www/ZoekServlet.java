@@ -228,9 +228,9 @@ public class ZoekServlet extends HttpServlet {
                        
                        
                        request.setAttribute("toekomst", "0");
-                      session.setAttribute("Search", null);
-                       
-            request.getRequestDispatcher("ZoekServlet?choice=huidigeVluchten").forward(request, response);
+                       session.setAttribute("Search", "geboekt");
+
+            request.getRequestDispatcher("ZoekServlet?choice=huidigeVluchten&Zoeken=fuck").forward(request, response);
         }
         
         else if (session.getAttribute("Search") == "uitgaand") {
