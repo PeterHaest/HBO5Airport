@@ -187,6 +187,7 @@ return E;
         } catch (Exception e) {
         }
     }
+    
           public Vliegtuig get_by_id ( Integer id)
         {
             ArrayList<Vliegtuig> lijst = getVliegtuigLijst();
@@ -198,4 +199,35 @@ return E;
             }
            return v;
         }
+          public void Add_Row(Map<String,Object> Parameters, String Table){
+         StringBuilder b = new StringBuilder();
+         b.append("insert into ");
+         b.append(Table);
+         b.append(" values ( ");
+         Integer teller = 0;
+        for (Map.Entry<String, Object> entry : Parameters.entrySet()) {
+            teller++;
+
+            String s;
+            if (entry.getValue().equals("null") || entry.getValue().equals("")) {
+                 s = " null ";
+            }
+            else{
+                 s =" '"+ entry.getValue()+"' ";
+            }
+         
+
+            b.append(s);
+            if (Parameters.size() > teller) {
+                b.append(", ");
+            }
+        }
+        b.append(")");
+         try {
+            statement = connection.prepareStatement(b.toString());
+            statement.executeUpdate();
+            connection.commit();         
+        } catch (Exception e) {
+        }
+     }
 }

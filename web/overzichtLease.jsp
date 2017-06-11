@@ -140,6 +140,6 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtLease.jsp");%>
     </body>
 </html>

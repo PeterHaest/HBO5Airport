@@ -124,5 +124,13 @@
            
        </footer>
 
+
+
+
+
+
+    <%session.setAttribute("currentPage", "overzichtBemanning.jsp");%>
+
+
     </body>
 </html>

@@ -134,6 +134,9 @@
     <footer>
         <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
 
+
+    <%session.setAttribute("currentPage", "overzichtHangars.jsp");%>
+
     </footer>
 
     </body>

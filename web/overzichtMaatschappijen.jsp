@@ -69,10 +69,16 @@
  
   
                                 </div>
-                                <form  action="AdminServlet?choice=maatschappij" method="POST">
+
+
+                                <form  action="AdminServlet?choice=luchtvaartmaatschappij" method="POST">
+
+                                <div class="form-group"> 
+
                                     <h1 class=""></h1>
                                 <div class="form-group ">
                                     <h1 class="tour section-wrapper container section-title">overzicht van alle luchtvaartmaatschappijen</h1>
+
                                     <label for="LstMaatschappij">kies een maatschappij</label>
                                     <select onchange="this.form.submit()" class="form-control select" name="LstMaatschappij">
                                         <option selected="true"></option>
@@ -92,13 +98,18 @@
                                         <div>
                                             <label for="txtId">id</label>
                                             <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
+
+                                            <%session.setAttribute("txtid", L.getId());%>
+
                                             <label for="txtNaam">Naam</label>
                                             <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
                                          <%}%> 
                                         </div>
-                                            <td><a href=AdminServlet?choice=add&kind=maatschappij>Nieuwe Luchthavenmaatschappij</a></td>
-                                            <td><a href=AdminServlet?choice=update&kind=maatschappij>Gegevens wijzigen</td>
-                                            <td><a href=AdminServlet?choice=delete&kind=maatschappij>wissen</td>
+
+                                            <td><a href=AdminServlet?choice=add&kind=luchtvaartmaatschappij>Nieuwe Luchthavenmaatschappij</a></td>
+                                            <td><a href=AdminServlet?choice=update&kind=luchtvaartmaatschappij>Gegevens wijzigen</td>
+                                            <td><a href=AdminServlet?choice=delete&kind=luchtvaartmaatschappij>wissen</td>
+
                                     </form>
                                   
                                     
@@ -124,7 +135,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtMaatschappijen.jsp");%>
 
     </body>
 </html>

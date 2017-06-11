@@ -65,47 +65,72 @@
 		    </div>
 	  	</div>
 	</nav>
-                                
-        <form  action="AdminServlet?choice=Haven" method="POST">
-            <h1 class="tour section-wrapper container section-title">Overzicht van alle luchthavens</h1>
-            <div class="form-group col-md-offset-2"> 
-                <label for="LstHaven">kies een luchthaven</label>
-                <select onchange="this.form.submit()" class="form-control select" name="LstHaven">
-                    <option selected="true"></option>
-                     <%ArrayList<Luchthaven> lijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
-                        <%for (Luchthaven item : lijst) {%>
-                        <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
-                       <%}%>
-                </select>
 
-            </div>           
-                   <%if (request.getAttribute("Luchthaven") != null) {%>
+ 
+  
+                                </div>
 
+                                <div class="container text-center">
+                                <form  action="AdminServlet?choice=Haven" method="POST">
+                                    <div class="mx-auto">
 
-        </form>
-        <div class="form-group col-md-offset-2">
-            <form action="AdminServlet" method="get" >
-                <%Luchthaven L = (Luchthaven) request.getAttribute("Luchthaven");%>
-                <%session = request.getSession();
-                session.setAttribute("ChosenHaven", L);%>
-                   <label for="txtId">id</label>
-                   <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
-                   <label for="txtNaam">Naam</label>
-                   <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
-                   <label for="txtStad">Stad</label>
-                   <input type="text" name="txtStad" value="<%=L.getStad()%>"/>
+                                <div class="form-group"> 
+                                    <label for="LstHaven">kies een luchthaven</label>
+                                    <select onchange="this.form.submit()" class="form-control" name="LstHaven" style="width: 50%; margin: 15px">
+                                        <option selected="true"></option>
+                                         <%ArrayList<Luchthaven> lijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
+                                            <%for (Luchthaven item : lijst) {%>
+                                            <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
+                                           <%}%>
+                                    </select>
 
-                   <input type="submit" name="btnWijzig" value="Wijzig"/>
-                   <input type="submit" name="btnVerwijder" value="Verwijder"/>
-        </div>
-                 <%}%>  
-                 <div class="form-group col-md-offset-2">
-                    <a href=AdminServlet?choice=add&kind=haven>Nieuwe Luchthaven</a>
-                    <a href=AdminServlet?choice=update&kind=haven>Gegevens wijzigen</a>
-                    <a href=AdminServlet?choice=delete&kind=haven>wissen</a>
-                </div>
-        </form>
-       
+                                    </div>       
+
+                                </div>           
+                                           <%if (request.getAttribute("Luchthaven") != null) {%>
+   
+
+                                    </form>
+                                          
+                                           <form action="AdminServlet" method="get" >
+                                         <%Luchthaven L = (Luchthaven) request.getAttribute("Luchthaven");%>
+                                         <%session = request.getSession();
+                                         session.setAttribute("ChosenHaven", L);%>
+                                         
+
+                                         <div class="container-fluid" >
+                                            <label for="txtId" class="">id</label>
+                                            <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
+
+                                            <label for="txtNaam">Naam</label>
+                                            <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
+                                            <label for="txtStad">Stad</label>
+                                            <input type="text" name="txtStad" value="<%=L.getStad()%>"/>
+
+                                        </div>
+                                             <%}%>  
+                                             <div class="mt-10">
+                                             <button><a href=AdminServlet?choice=add&kind=haven>Nieuwe Luchthaven</a></button>
+                                             <button><a href=AdminServlet?choice=update&kind=haven>Gegevens wijzigen</a></button>
+                                             <button><a href=AdminServlet?choice=delete&kind=haven>wissen</a></button>
+                                            </div>
+
+                                    </form>
+                                 
+                                    
+                                    
+                                    
+                                    
+         
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+       </div>
+
        <footer>
            <p>Project gemaakt door team 2 (Steve Dekerf, Peter Haest and Tijs Torfs)</p>
            
@@ -116,7 +141,7 @@
 
 
 
-
+    <%session.setAttribute("currentPage", "overzichtLuchthavens.jsp");%>
 
     </body>
 </html>
