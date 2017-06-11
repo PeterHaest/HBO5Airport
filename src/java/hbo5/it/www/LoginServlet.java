@@ -110,8 +110,13 @@ public class LoginServlet extends HttpServlet {
                     }
 
                     session.setAttribute("Crew",dapersoon.CheckIfCrew(Persoon) );
-                            
+                      
+                    if (session.getAttribute("Crew") != null) {
+                        url = "StartPageBemanningslid.jsp";
+                    }
+                    else{
                url = "index.jsp";
+                    }
                 }
                 else {
                  url = "LoginPage.jsp";
