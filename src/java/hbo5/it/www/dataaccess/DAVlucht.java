@@ -556,22 +556,54 @@ public DAVlucht (String url, String login, String password, String driver)   thr
           
          return nMap; 
      }
-     public void Add_booking(Integer pasId, String vluchtid, Integer persoonid, String klasseid, String seat){
-         
-        
-         
-         
-         
-         
-         
-         
-         
-         
-         
-     }
      
+      public Map<Integer,ArrayList<String>> Reisschema(Integer id){
+          Map<Integer,ArrayList<String>> nMap = new HashMap<>();
+           ResultSet set2;
+         PreparedStatement statement2;
+         StringBuilder b = new StringBuilder();
+          b.append("select vb.taak, v.CODE, vt.naam, l2.naam, v.VERTREKTIJD , l.naam, v.AANKOMSTTIJD, lm.NAAM  from vluchtbemanning vb ");
+         b.append("inner join vlucht v on v.ID = vb.VLUCHT_ID ");
+         b.append("inner join VLIEGTUIGTYPE vt on v.VLIEGTUIG_ID = vt.id ");
+         b.append("left join luchthaven l on l.ID = v.AANKOMSTLUCHTHAVEN_ID ");
+         b.append("left join luchthaven l2 on l2.id = v.VERTREKLUCHTHAVEN_ID ");
+         b.append("FULL join bemanningslid b on b.ID = vb.BEMANNINGSLID_ID ");
+         b.append("right join LUCHTVAARTMAATSCHAPPIJ lm on lm.ID = b.LUCHTVAARTMAATSCHAPPIJ_ID ");
+         b.append("where vb.BEMANNINGSLID_ID = ? ");
+         b.append("and v.VERTREKTIJD > SYSDATE ");
+            try {
+             Integer teller = 1;
+             statement = connection.prepareStatement("select id from bemanning where persoon_id = ?");
+             statement.setInt(1, id);
+             set = statement.executeQuery();
+             while(set.next()){
+                 try {
+                     
+                     statement2 = connection.prepareStatement(b.toString());
+                     statement2.setString(1, set.getString(1));
+                     set2 = statement2.executeQuery();
+                      while (set2.next()) {
+                        ArrayList<String> lijst = new ArrayList<>();
+                         lijst.add(set.getString(1));
+                         lijst.add(set.getString(2));
+                         lijst.add(set.getString(3));
+                         lijst.add(set.getString(4));
+                         lijst.add(set.getDate(5).toString());
+                         lijst.add(set.getString(6));                       
+                         lijst.add(set.getDate(7).toString());
+                        lijst.add(set.getString(8));
+                       nMap.put(teller, lijst);
+                         teller++;
+                         
+                     }
+                 } catch (Exception e) {
+                 }
+             }
+              } catch (Exception e) {
+         }  
+         return nMap; 
      
-
+      }
 }
  
 

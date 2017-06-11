@@ -235,6 +235,11 @@ public class AdminServlet extends HttpServlet {
              else if ("Leasemaatschappij".equals(request.getParameter("page"))){
                 url="overzichtLease.jsp";
             }
+             else if ("Piloot".equals(request.getParameter("page"))) {
+                 session.setAttribute("Reisschema", davlucht.Reisschema((Integer)session.getAttribute("id")));
+                 
+            url = "reisschema.jsp";
+        }
 
              else if ("luchtvaartmaatschappij".equals(request.getParameter("page"))){
 
