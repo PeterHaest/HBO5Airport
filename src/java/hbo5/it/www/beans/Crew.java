@@ -19,7 +19,7 @@ public class Crew extends Vlucht {
         return naam;
     }
 
-    public void setNaam(String naam) {
+        public void setNaam(String naam) {
         this.naam = naam;
     }
 
