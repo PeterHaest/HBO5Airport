@@ -79,12 +79,16 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
       session = request.getSession();
+      session.invalidate();
+       session = request.getSession();
+      String url = "";
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("login") != null){
                 String naam = request.getParameter("Username");
                 String Pas = request.getParameter("Paswoord");
                 int result =  dapersoon.CheckLogin(naam, Pas);
                 if (result == 1){
+                    
                     Persoon Persoon = dapersoon.GetPersoon(naam);
                     //Sessie aanmaken
                     
@@ -107,23 +111,30 @@ public class LoginServlet extends HttpServlet {
                          rd = request.getRequestDispatcher("StartDirector.jsp");
                          rd.forward(request, response);
                     }
-                    else{
-                         rd = request.getRequestDispatcher("index.jsp");
-                         rd.forward(request, response);
-                    }
+
                     session.setAttribute("Crew",dapersoon.CheckIfCrew(Persoon) );
-                            
-               
+                      
+                    if ((Integer)session.getAttribute("Crew") == 1 ) {
+                        url = "StartPageBemanningslid.jsp";
+                    }
+                    else{
+               url = "index.jsp";
+                    }
                 }
                 else {
-                    rd = request.getRequestDispatcher("LoginPage.jsp");
-                    rd.forward(request, response);
+                 url = "LoginPage.jsp";
+
                 }
            
-   
+      rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
 }
            
-            
+            else if(request.getParameter("Loguit")!= null){
+                session.invalidate();
+                 rd = request.getRequestDispatcher("index.jsp");
+             rd.forward(request, response);
+            }
        else if (request.getParameter("registreer")!= null){
            int id;
                 if (session.getAttribute("id") == null) {

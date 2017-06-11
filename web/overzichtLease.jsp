@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : overzichtLease
     Created on : 23-mei-2017, 14:19:49
@@ -69,8 +70,8 @@
                         
 
             <form  action="AdminServlet?choice=Leasemaatschappij" method="POST">
-            <h1 class="tour section-wrapper container section-title">Lease overzicht.</h1>
-            <div class="form-group col-md-offset-2"> 
+            <h1 class="tour section-wrapper container section-title">een overzicht van alle leasemaatschappijen</h1>
+            <div class="container"> 
 
                 <label for="LstLease">kies een maatschappij</label>
                 <select onchange="this.form.submit()" class="form-control select" name="LstLease">
@@ -80,8 +81,7 @@
                         <option value="<%=item%>" ><%=item%></option>
                        <%}%>
                 </select>
-
-            </div>           
+       
             <%if (request.getAttribute("Persoon") != null) {%>
 
             <div class="form-group col-md-offset-2"> 
@@ -89,12 +89,14 @@
                 <%Leasemaatschappij L = (Leasemaatschappij) request.getAttribute("Lease");%>
                 <form >
                     <div>
+                        <table class="table">
                         <label for="txtId">id</label>
                         <input name="txtId" type="text" readonly="true" value="<%=L.getId()%>"/>
                         <label for="txtNaam">Naam</label>
                         <input name="txtNaam" type="text" value="<%=L.getNaam()%>"/>
                         <input type="submit" name="btnWijzig" value="Wijzig"/>
                         <input type="submit" name="btnVerwijder" value="Verwijder"/>
+                        </table>
                     </div>
                 </form>
                 <%}%>                               
@@ -105,25 +107,24 @@
          Leasemaatschappij L = (Leasemaatschappij) request.getAttribute("VarLeasemaatschappij");
          session.setAttribute("L",request.getAttribute("VarLeasemaatschappij") );
      %>
-    <div class="form-group col-md-offset-2">  
-         <table>
+    <div >  
+         <table class="container" >
              <tr>
                  <th>Naam</th>
-                 <th>Id</th>
+                 <td><input value="<%=L.getNaam()%>" name="txtnaam"></</td>
+                 
              </tr>
              <tr>
-                 <td><input value="<%=L.getNaam()%>" name="txtnaam"></</td>
+                 <th>Id</th>
                  <td><input value="<%=L.getId()%>" name="txtid"></td>
                      <%}%>
             </tr>
             <tr>
-                <td><a href=AdminServlet?choice=add&kind=lease>Nieuwe leasemaatschappij</a></td>
-            </tr>
-            <tr>
-                <td><a href=AdminServlet?choice=update&kind=lease>Gegevens wijzigen</td>
-            </tr>
-            <tr>
-                <td><a href=AdminServlet?choice=delete&kind=lease>wissen</td>
+                <td><button class="btn-default"><a href=AdminServlet?choice=add&kind=lease>Nieuwe leasemaatschappij</a></button></td>
+        
+                <td><button class="btn-default"><a href=AdminServlet?choice=update&kind=lease>Gegevens wijzigen</a></button></td>
+            
+                <td><button class="btn-default"><a href=AdminServlet?choice=delete&kind=lease>wissen</a></button></td>
             </tr>
             
          </table>       
@@ -137,9 +138,12 @@
 
 
 
+            </div>
 
 
 
+    <%session.setAttribute("currentPage", "overzichtLease.jsp");%>
 
     </body>
+
 </html>

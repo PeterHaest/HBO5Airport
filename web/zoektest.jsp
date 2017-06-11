@@ -61,7 +61,9 @@
 				</div>
 			</div>
                     
+
                         <div id="date" class="col-md-3 col-sm-6 date" style="display:none">
+
 				<div class="input-group">
 					<input name="date" type="date" class="form-control border-radius border-right"/>
 					<span class="input-group-addon border-radius custom-addon">

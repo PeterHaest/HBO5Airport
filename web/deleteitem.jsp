@@ -88,8 +88,11 @@
                                             <%}%>
                                             <%  if (session.getAttribute("ChosenHaven") != null) {
                                                 Luchthaven LH = (Luchthaven) session.getAttribute("ChosenHaven");
-                                            session.setAttribute("delItem", "Haven"); %>
-                                            <h3> bent u zeker dat u <%=LH.getNaam()%> wilt wissen?
+
+                                            session.setAttribute("delItem", "Luchthaven"); %>
+
+
+                                            <h3> bent u zeker dat u <%=LH.getNaam()%> wilt wissen?</h3>
                                              <table>
                                                 <th>id</th>
                                                 <th>naam</th>
@@ -100,7 +103,12 @@
                                                 
 <%}%>
                                
-                                  
+                                    <%if (session.getAttribute("Vlucht") != null) {
+                                      session.setAttribute("delItem", "Passagier");%>
+                                    <h3> bent u zeker dat u vlucht <%=session.getAttribute("Vlucht")%> wilt annuleren?</h3>
+                                    <input type="text" name="txtid" readonly="true" value="<%=session.getAttribute("Vlucht")%>" hidden="true"/>
+<%}%>
+
    
                                     
                                     <input type="submit" name="delete">

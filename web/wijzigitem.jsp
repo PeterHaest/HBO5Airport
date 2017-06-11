@@ -93,8 +93,12 @@
                                     <%}%>
                                     <% if(session.getAttribute("ChosenHaven") != null) {
                                         Luchthaven LH = (Luchthaven) session.getAttribute("ChosenHaven");
-                                        session.setAttribute("newItem", "haven"); %>
-<table>
+
+
+                                        session.setAttribute("newItem", "Luchthaven"); %>
+
+
+                                        <table class="table">
                                     <th>id</th>
                                     <th>naam</th>
                                     
@@ -142,16 +146,17 @@
                                                     <%}%>
                                                 </select>
                                             </td>
+
                                     </tr>
 <%}%>
 
+<tr><input type="submit" name="update" value="wijzig"></tr>
 
 
 
 
 
-
-                                    <input type="submit" name="update">
+                                    
                                 </table>
                                                                         </form>
 

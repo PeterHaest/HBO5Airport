@@ -1,21 +1,22 @@
 <%-- 
     HBO5 Programeren 4
-    Document   : index
-    Created on : 23-apr-2017, 17:33:50
+    Document   : booking
+    Created on : 11-jun-2017, 14:51:04
     Author     : steve
 --%>
 
-<%@page import="hbo5.it.www.beans.Luchthaven"%>
-<%@page import="hbo5.it.www.beans.Vlucht"%>
-<%@page import="java.util.ArrayList"%>
-<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
-<head>
+<%@page import="hbo5.it.www.beans.Vliegtuigklasse"%>
+<%@page import="java.util.ArrayList"%>
+<html>
+    <head>
 		<!-- meta -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
+	
         <title>${title}</title>
+
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/ionicons.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
@@ -24,6 +25,8 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        
+        
       
 </head>
     <body>
@@ -39,14 +42,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<%session = request.getSession();
-                                String url= "";
+                       
+                            <%session = request.getSession();
+                            String url= "";
                                 if ("Admin".equals(session.getAttribute("paswoord"))) {
                                    url = "StartAdmin.jsp";}
                                 else if("Director".equals(session.getAttribute("paswoord"))){
                                    url = "StartDirector.jsp";}
                                 else{
                                     url = "index.jsp";}%>
+
 
                                     <a class="navbar-brand" href="<%=url%>" title="HOME"><i class="ion-paper-airplane"></i> Java <span>travel</span></a>
 			</div> <!-- /.navbar-header -->
@@ -55,7 +60,7 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
                                     <%if("Director".equals(session.getAttribute("paswoord"))){%>
-                                        <li><a href="ZoekServlet?Zoeken=statistieken">Statistieken</a></li>
+                                        <li><a href="ZoekServlet?Zoeken=statistieken&Search=Luchthaven">Statistieken</a></li>
                                             <%}%>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vluchtoverzicht <span class="caret"></span></a>
@@ -70,58 +75,48 @@
 		    </div><!-- /.navbar-collapse -->
 	  	</div><!-- /.container -->
 	</nav>
-        </div>
-        <section class="tour section-wrapper container">
-            <!--for demo wrap-->
-            <h2 class="tour section-title">Inkomende vluchten</h2>
-            <p class="tour section-subtitle">Een overzicht van alle inkomende vluchten per luchthaven.</p>
-            <form action="ZoekServlet">
-                    <label for="Luchthaven">kies een luchthaven</label>
-                        <select onchange="this.form.submit()" class="form-control select" name="Luchthaven">
-                            <option selected="true" value ="0"></option>
-                            <%ArrayList<Luchthaven> lijst =(ArrayList<Luchthaven>) session.getAttribute("lijsthavens");%>
-                            <%for (Luchthaven item : lijst) {%>
-                                <option value="<%=item.getId()%>" ><%=item.getNaam()%></option>
-                                <%}%>
-                        </select>
-        </section>                       
-            <section class="tour section-wrapper tablecontainer">
-            <table cellpadding="0" cellspacing="0" border="0" id="myTable" class="tablecontainer tablesorter">
-                    <thead>              
-                        <tr>
-                            <th>Vluchtnummer</th>
-                            <th>Vertrek</th>
-                            <th>Aankomst</th>
-                            <th>Aankomsttijd</th>
-                        </tr>
-                    </thead>
-                <tbody>
-            </section>
-                <%ArrayList<Vlucht> resultaat = 
-                (ArrayList<Vlucht>) request.getAttribute("vluchten");
-
-		for (Vlucht vlucht: resultaat){%>
-                <form action="">
-                <tr>
-                    <td><a href="ZoekServlet?Zoeken=Details&id=<%=vlucht.getId()%>&hide=yes"><%=vlucht.getCode()%></a></td>
-                    <td><%=vlucht.getVertrekluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomstluchthaven().getNaam()%></td>
-                    <td><%=vlucht.getAankomsttijd() %></td>
-                                                             <%if(session.getAttribute("id") != null){%>
-                                                              <td> <button value="<%=vlucht.getId()%>"><a href="ZoekServlet?choice=Book&vluchtid=<%=vlucht.getId()%>">boeken</a></button></td>
+       </div> 
+     
+                                
+                                
+                                    <%ArrayList<Vliegtuigklasse> lijst =(ArrayList<Vliegtuigklasse>) session.getAttribute("vliegtuigklasses");%>
+                                  
+                                
+                                    <div class="container">
+                                        <form action="ZoekServlet?choice=geboekt">
+                                        <table class="table table-responsive">
+                                        <tr>
+                                            <td>vlucht</td>
+                                            <td><%=session.getAttribute("gekozenvlucht")%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>naam</td>
+                                            <td><%=session.getAttribute("naam")%> <%=session.getAttribute("familienaam")%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>klasse</td>
+                                            <td>
+                                        <select name="LstKlasse">
+                                            <%for (Vliegtuigklasse elem : lijst) {%>
+                                            <option value="<%=elem.getId()%>"><%=elem.getNaam()%></option>
 <%}%>
-
-                </tr>
-                </form>
-                
-		<%}%>
-            </tbody>
-            </table>
-
-
-
-
-
+                                        </select>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                            <td>voorkeur stoel</td>
+                                            <td> <input type="text" name="txtStoel" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="Zoeken" value="Booking" class="btn-lg ">
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </div>
+</form>
+                       
        
        <footer>
            <div class="container">
@@ -137,10 +132,14 @@
 			</div>
 		</div>	
        </footer>
+
+
+
+
+
+
+
+
     </body>
 </html>
-
-
-      
-        
 

@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : overzichtvliegtuigen
     Created on : 23-mei-2017, 14:19:49
@@ -73,10 +74,10 @@
   
                                 </div>
                                 <form  action="AdminServlet?choice=Vliegtuig" method="POST">
-                                <div class="form-group">
+                                <div class="container text-center">
                                     <h1 class="tour section-wrapper container section-title">Overzicht van alle vliegtuigen.</h1>
                                     <label for="LstVliegtuigen">kies een vliegtuig</label>
-                                    <select onchange="this.form.submit()" class="form-control select" name="LstVliegtuigen">
+                                    <select onchange="this.form.submit()" class="form-control" name="LstVliegtuigen">
                                         <option selected="true"></option>
                                          <%ArrayList<Vliegtuig> lijst =(ArrayList<Vliegtuig>) session.getAttribute("lijstvliegtuigen");%>
                                             <%for (Vliegtuig item : lijst) {%>
@@ -84,7 +85,7 @@
                                            <%}%>
                                     </select>
                                            
-                                </div>           
+                                         
                                            <%if (request.getAttribute("Vliegtuig") != null) {%>
    
 
@@ -95,29 +96,39 @@
                                            
                                            
                                     <form >
-                                        <div>
+                                        
                                             <input  name="txtvliegtuigid" hidden="true" value="<%=V.getVliegtuigtype_id() %>"/>
                                              <input  name="txtLeaseid" hidden="true" value="<%=V.getLeasemaatschappij_id()%>"/>
                                               <input  name="txtmaatschappijid" hidden="true" value="<%=V.getLuchtvaartmaatschappij_id()%>"/>
                                               <%session.setAttribute("currentId", V.getId());%>
-                                            <label for="txtType">VliegtuigType</label>
-                                            <input name="txtType" type="text" value="<%=V.getType_naam()%>"/>
-                                            <label for="txtMaatschappij">Vliegtuig Maatschappij</label>
-                                            <input name="txtMaatschappij" type="text" value="<%=V.getMaatschappij_naam()%>"/>
-                                             <label for="chkLeased">Leased?</label>
+                                              
+                                              
+                                              <table class="table">
+                                                  <tr>
+                                                      <th> <label for="txtType">VliegtuigType</label></th>
+                                                      <td><input name="txtType" type="text" value="<%=V.getType_naam()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th><label for="txtMaatschappij">Vliegtuig Maatschappij</label></th>
+                                                <td> <input name="txtMaatschappij" type="text" value="<%=V.getMaatschappij_naam()%>"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th><label for="chkLeased">Leased?</label></th>
                                              <% if (V.isLeased()){%>
-                                             <input name="chkLeased" type="checkbox" checked/>                  
-                                             <input name="txtMaatschappij" type="text" value="<%=V.getLease_maatschappij_naam()%>"/>
-                                             <label for="chkLeased">Leased?</label>
+                                                <td><input name="chkLeased" type="checkbox" checked/>   </td> 
+                                                <td>  <input name="txtMaatschappij" type="text" value="<%=V.getLease_maatschappij_naam()%>"/></td>
+                                            
                                              
                                              <%} else{%>
-                                              <input name="chkLeased" type="checkbox" />
+                                             <td>  <input name="chkLeased" type="checkbox" /></td>   
                                               <%}%>
-                                             <%}%>    
-                                             <td><a href=AdminServlet?choice=add&kind=vliegtuig>Nieuw vliegtuig</a></td>
-                                            <td><a href=AdminServlet?choice=update&kind=vliegtuig>Gegevens wijzigen</td>
-                                            <td><a href=AdminServlet?choice=delete&kind=vliegtuig>wissen</td>
-                                        </div>
+                                             <%}%> 
+                                               </tr>
+                                             <td><button class="btn-default"><a href=AdminServlet?choice=add&kind=vliegtuig>Nieuw vliegtuig</a></button></td>
+                                             <td><button class="btn-default"><a href=AdminServlet?choice=update&kind=vliegtuig>Gegevens wijzigen</a></button></td>
+                                             <td><button class="btn-default"><a href=AdminServlet?choice=delete&kind=vliegtuig>wissen</a></button></td>
+                                        
+                                             </table>
                                     </form>
                               
                                     
@@ -144,6 +155,8 @@
 
 
 
+                                <%session.setAttribute("currentPage", "overzichtvliegtuigen.jsp");%>
 
     </body>
+
 </html>
