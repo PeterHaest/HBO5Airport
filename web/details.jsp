@@ -77,7 +77,7 @@
             <!--for demo wrap-->
             <h1 class="tour section-wrapper container">Details voor vlucht met vluchtnummer ${vlucht.code}:</h1>
             <% if (hide.equals("no")) {%>
-                <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 15px" href="ZoekServlet?Zoeken=Zoeken&optie=${optie}&input=${input}">Return</a>
+                <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 15px" href="ZoekServlet?Zoeken=Zoeken&optie=${optie}&input=${input}&date=${date}">Return</a>
             <%}%>
             <% if (hide.equals("yes")) {%>
                 <a class="btn btn-default col-md-offset-1 btn-lg" style="margin-bottom: 10px" href="ZoekServlet?Zoeken=inkomend">Return naar inkomende vluchten</a>

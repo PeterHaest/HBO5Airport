@@ -272,9 +272,9 @@ public class ZoekServlet extends HttpServlet {
                 ArrayList<Vlucht> vluchten = davlucht.VluchtOpDatum(input);
                 request.setAttribute("vluchten", vluchten);
                 String date  = request.getParameter("date");
-                request.setAttribute("input", date);
                 request.setAttribute("optie", optie);
                 request.setAttribute("returnoptie", returnoptie);
+                request.setAttribute("date", date);
                 request.getRequestDispatcher("zoekresult.jsp").forward(request, response);
             }
             else if ("bestemming".equals(request.getParameter("optie"))){
@@ -307,9 +307,11 @@ public class ZoekServlet extends HttpServlet {
             String optie = request.getParameter("optie");
             String input = request.getParameter("input");
             String hide = request.getParameter("hide");
+            String date = request.getParameter("date");
             request.setAttribute("vlucht", v);
             request.setAttribute("optie", optie);
             request.setAttribute("input", input);
+            request.setAttribute("date", date);
             request.setAttribute("hide", hide);
             request.setAttribute("passagiers", passagiers);
             request.getRequestDispatcher("details.jsp").forward(request, response);
