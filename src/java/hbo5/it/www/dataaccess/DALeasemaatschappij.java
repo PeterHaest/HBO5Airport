@@ -110,7 +110,7 @@ public DALeasemaatschappij(String url, String login, String password, String dri
         }
                 
     }
-    public void deletePas(String Vluchtid, String persid){
+    public void deletePas(String Vluchtid, Integer persid){
               StringBuilder builder = new StringBuilder();
         builder.append("delete from passagier ");
         builder.append(" where  vlucht_id = ");

@@ -497,7 +497,7 @@ public class AdminServlet extends HttpServlet {
             if ("Passagier".equals(session.getAttribute("delItem"))) {
                 obj = "Passagier";
                 url ="ZoekServlet?choice=huidigeVluchten";
-                dalease.deletePas((String)session.getAttribute("Vlucht"), (String) session.getAttribute("id"));
+                dalease.deletePas((String)session.getAttribute("Vlucht"), (Integer) session.getAttribute("id"));
             }
             
              }
